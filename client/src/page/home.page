@@ -1,0 +1,60 @@
+<template>
+  <div class="show-box">
+    <div class="show-1" id="show1"></div>
+  </div>
+</template>
+
+<script>
+  module.exports = {
+    data: {
+    },
+    created: function () {
+      this.getData('http://127.0.0.1:5000/show1').then((data) => {
+        const chart1 = echarts.init(document.getElementById('show1'))
+        chart1.setOption({
+          series : [
+            {
+              name: '概况',
+              type: 'pie',
+              radius : '55%',
+              data: data,
+              label: {
+                "formatter": '{b}: {c}只 占比: {d}%'
+              },
+              itemStyle: {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+              }
+            }
+          ]
+        })
+      })
+    },
+    getData: (url) => {
+      return new Promise((resolve, reject) => {
+        const ajax = new XMLHttpRequest();
+        //步骤二:设置请求的url参数,参数一是请求的类型,参数二是请求的url,可以带参数,动态的传递参数starName到服务端
+        ajax.open('get', url)
+        //步骤三:发送请求
+        ajax.send()
+        //步骤四:注册事件 onreadystatechange 状态改变就会调用
+        ajax.onreadystatechange = function () {
+          if (ajax.readyState == 4 &&ajax.status == 200) {
+            resolve(JSON.parse(ajax.responseText).data)
+          }
+        }
+      })
+    }
+  }
+</script>
+
+
+<style lang="less">
+  .show-1 {
+    width: 400px;
+    height: 400px;
+  }
+</style>

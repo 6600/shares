@@ -7,6 +7,11 @@ import json
 import requests
 import time
 
+from flask import Flask
+from flask_cors import *
+
+app = Flask(__name__)
+CORS(app, supports_credentials=True)
 
 # 今天日期
 date = time.strftime('%Y.%m.%d',time.localtime(time.time()))
@@ -44,12 +49,7 @@ if not os.path.exists('./history/' + date + '.csv'):
   with open(file_path, mode='w', encoding='utf_8_sig') as file_obj:
     file_obj.write(summary)
 
-# 跌了的列表
-lostList = []
-# 涨了的列表
-winList = []
-# 没有涨没有跌的
-flatList = []
+
 # 总交易价格
 allTraAmount = 0
 
@@ -67,16 +67,37 @@ for temp in firstFloor:
 
 print("数据总条数: " + str(len(secondFloor)))
 
-for player in secondFloor:
-  win = float(player[30])
-  if win > 0:
-    winList.append(player)
-  elif win == 0:
-    flatList.append(player)
-  else:
-    lostList.append(player)
+
   # 增加价格
   # allTraAmount += player['traPri']
 
-print('今日: [%s] 只股票赢了 [%s] 只股票输了 [%s] 只股票在观望!' % (str(len(winList)), str(len(lostList)), str(len(flatList))))
+# print('今日: [%s] 只股票赢了 [%s] 只股票输了 [%s] 只股票在观望!' % (str(len(winList)), str(len(lostList)), str(len(flatList))))
 # print('成交金额 [%s], 平均成交金额 [%s]' % (str(allTraAmount), str(allTraAmount / len(todayData))))
+
+@app.route("/show1")
+def index():
+  # 跌了的列表
+  lostList = []
+  # 涨了的列表
+  winList = []
+  # 没有涨没有跌的
+  flatList = []
+  for player in secondFloor:
+    win = float(player[30])
+    if win > 0:
+      winList.append(player)
+    elif win == 0:
+      flatList.append(player)
+    else:
+      lostList.append(player)
+  return json.dumps({
+    "err": 0,
+    "data": [
+      {"value": len(winList), "name":'涨'},
+      {"value": len(lostList), "name":'跌'},
+      {"value": len(flatList), "name":'平'}
+    ]
+  })
+
+if __name__ == '__main__':
+  app.run()
