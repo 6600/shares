@@ -19,7 +19,36 @@ body, html, .ox {
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
 }
-.ox-home .show-1 {
+.ox-home .show {
+  position: relative;
+  border: 1px solid #ccc;
+  float: left;
+}
+
+.ox-home .show .title {
+  position: absolute;
+  background-color: skyblue;
+  color: white;
+  width: calc(100% - 20px);
+  height: 26px;
+  line-height: 25px;
+  padding: 0 10px;
+}
+
+.ox-home .show-1,
+.ox-home .chart-1 {
   width: 400px;
-  height: 400px;
+  height: 300px;
+}
+
+.ox-home .show-2,
+.ox-home .chart-2 {
+  width: 1000px;
+  height: 300px;
+}
+
+.ox-home .show-3,
+.ox-home .chart-3 {
+  width: 600px;
+  height: 300px;
 }

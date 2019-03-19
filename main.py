@@ -75,7 +75,7 @@ print("数据总条数: " + str(len(secondFloor)))
 # print('成交金额 [%s], 平均成交金额 [%s]' % (str(allTraAmount), str(allTraAmount / len(todayData))))
 
 @app.route("/show1")
-def index():
+def show1():
   # 跌了的列表
   lostList = []
   # 涨了的列表
@@ -98,6 +98,56 @@ def index():
       {"value": len(flatList), "name":'平'}
     ]
   })
+
+# 获取分布情况
+@app.route("/distribution")
+def distribution():
+  distributionList = []
+  ind = 0
+  for player in secondFloor:
+    distributionList.append([ind, player[31], player[0]])
+    ind += 1
+  return json.dumps({
+    "err": 0,
+    "data": distributionList
+  })
+
+# 获取分布情况
+@app.route("/transactionAve")
+def transactionAve():
+  buyPrice = [0, 0, 0, 0, 0]
+  buyNumber = [0, 0, 0, 0, 0]
+  sellPrice = [0, 0, 0, 0, 0]
+  sellNumber = [0, 0, 0, 0, 0]
+  length = len(secondFloor)
+  for player in secondFloor:
+    print(float(player[8]) / 10)
+    buyPrice[0] += float(player[8]) / length
+    buyNumber[0] += float(player[9]) / length
+    buyPrice[1] += float(player[10]) / length
+    buyNumber[1] += float(player[11]) / length
+    buyPrice[2] += float(player[12]) / length
+    buyNumber[2] += float(player[13]) / length
+    buyPrice[3] += float(player[14]) / length
+    buyNumber[3] += float(player[15]) / length
+    buyPrice[4] += float(player[16]) / length
+    buyNumber[4] += float(player[17]) / length
+
+    sellPrice[0] += float(player[18]) / length
+    sellNumber[0] += float(player[19]) / length
+    sellPrice[1] += float(player[20]) / length
+    sellNumber[1] += float(player[21]) / length
+    sellPrice[2] += float(player[22]) / length
+    sellNumber[2] += float(player[23]) / length
+    sellPrice[3] += float(player[24]) / length
+    sellNumber[3] += float(player[25]) / length
+    sellPrice[4] += float(player[26]) / length
+    sellNumber[4] += float(player[27]) / length
+  return json.dumps({
+    "err": 0,
+    "data": [buyPrice, buyNumber, sellPrice, sellNumber]
+  })
+
 
 if __name__ == '__main__':
   app.run()

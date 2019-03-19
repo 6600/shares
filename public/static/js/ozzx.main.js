@@ -194,15 +194,15 @@ window.ozzx = {
       "data": {},
       "created": function created() {
         this.getData('http://127.0.0.1:5000/show1').then(function (data) {
-          var chart1 = echarts.init(document.getElementById('show1'));
+          var chart1 = echarts.init(document.getElementById('chart1'));
           chart1.setOption({
             series: [{
               name: '概况',
               type: 'pie',
-              radius: '55%',
+              radius: '60%',
               data: data,
               label: {
-                "formatter": '{b}: {c}只 占比: {d}%'
+                "formatter": '{b}: {d}%'
               },
               itemStyle: {
                 emphasis: {
@@ -211,6 +211,90 @@ window.ozzx = {
                   shadowColor: 'rgba(0, 0, 0, 0.5)'
                 }
               }
+            }],
+            color: ['#f00', '#090', '#aeaeae']
+          });
+        });
+        this.getData('http://127.0.0.1:5000/distribution').then(function (data) {
+          var chart2 = echarts.init(document.getElementById('chart2'));
+          chart2.setOption({
+            xAxis: {
+              show: false
+            },
+            yAxis: {},
+            grid: {
+              left: 30,
+              top: 50,
+              bottom: 20,
+              right: 30
+            },
+            tooltip: {
+              formatter: function formatter(obj) {
+                var value = obj.value;
+                return "".concat(value[2], ": ").concat(value[1], "%");
+              }
+            },
+            series: [{
+              symbolSize: 5,
+              data: data,
+              type: 'scatter',
+              markLine: {
+                data: [{
+                  type: 'average',
+                  name: '平均值'
+                }]
+              }
+            }]
+          });
+        });
+        this.getData('http://127.0.0.1:5000/transactionAve').then(function (data) {
+          var chart2 = echarts.init(document.getElementById('chart3'));
+          console.log(data[0]);
+          chart2.setOption({
+            xAxis: {
+              type: 'category',
+              axisTick: {
+                show: false
+              },
+              data: ['买/卖1', '买/卖2', '买/卖3', '买/卖4', '买/卖5']
+            },
+            yAxis: [{
+              type: 'value',
+              scale: true,
+              name: '平均价格',
+              max: 40,
+              min: 0
+            }, {
+              type: 'value',
+              scale: true,
+              name: '平均手数',
+              max: 2500,
+              min: 0
+            }],
+            grid: {
+              left: 30,
+              top: 70,
+              bottom: 20,
+              right: 50
+            },
+            series: [{
+              name: 'buy',
+              type: 'bar',
+              data: data[0]
+            }, {
+              name: 'sell',
+              type: 'bar',
+              data: data[2]
+            }, {
+              name: 'sellNumber',
+              type: 'line',
+              yAxisIndex: 1,
+              data: data[1]
+            }, {
+              name: 'sellNumber',
+              type: 'line',
+              yAxisIndex: 1,
+              data: data[3]
             }]
           });
         });
