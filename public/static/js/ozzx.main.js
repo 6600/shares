@@ -193,6 +193,8 @@ window.ozzx = {
     "home": {
       "data": {},
       "created": function created() {
+        var _this = this;
+
         this.getData('http://127.0.0.1:5000/show1').then(function (data) {
           var chart1 = echarts.init(document.getElementById('chart1'));
           chart1.setOption({
@@ -202,6 +204,8 @@ window.ozzx = {
               radius: '60%',
               data: data,
               label: {
+                position: 'inside',
+                color: '#495A80',
                 "formatter": '{b}: {d}%'
               },
               itemStyle: {
@@ -212,7 +216,7 @@ window.ozzx = {
                 }
               }
             }],
-            color: ['#f00', '#090', '#aeaeae']
+            color: ['#9966CC', '#EAF048', '#F6D6FF']
           });
         });
         this.getData('http://127.0.0.1:5000/distribution').then(function (data) {
@@ -244,7 +248,8 @@ window.ozzx = {
                   name: '平均值'
                 }]
               }
-            }]
+            }],
+            color: ['#82A6F5']
           });
         });
         this.getData('http://127.0.0.1:5000/transactionAve').then(function (data) {
@@ -258,6 +263,11 @@ window.ozzx = {
               },
               data: ['买/卖1', '买/卖2', '买/卖3', '买/卖4', '买/卖5']
             },
+            legend: {
+              left: 0,
+              top: 35,
+              data: ['平均买价', '平均卖价', '平均买数', '平均卖数']
+            },
             yAxis: [{
               type: 'value',
               scale: true,
@@ -268,34 +278,90 @@ window.ozzx = {
               type: 'value',
               scale: true,
               name: '平均手数',
-              max: 2500,
+              max: 4000,
               min: 0
             }],
             grid: {
               left: 30,
-              top: 70,
+              top: 100,
               bottom: 20,
               right: 50
             },
             series: [{
-              name: 'buy',
+              name: '平均买价',
               type: 'bar',
+              label: {
+                normal: {
+                  show: true,
+                  position: 'inside'
+                }
+              },
               data: data[0]
             }, {
-              name: 'sell',
+              name: '平均卖价',
               type: 'bar',
+              label: {
+                normal: {
+                  show: true,
+                  position: 'inside'
+                }
+              },
               data: data[2]
             }, {
-              name: 'sellNumber',
+              name: '平均买数',
               type: 'line',
+              label: {
+                normal: {
+                  show: true,
+                  position: 'top'
+                }
+              },
               yAxisIndex: 1,
               data: data[1]
             }, {
-              name: 'sellNumber',
+              name: '平均卖数',
               type: 'line',
+              label: {
+                normal: {
+                  show: true,
+                  position: 'top'
+                }
+              },
               yAxisIndex: 1,
               data: data[3]
-            }]
+            }],
+            color: ['#9966CC', '#00FF80', '#495A80', '#f17c67']
+          });
+
+          _this.getChart4();
+        });
+      },
+      "getChart4": function getChart4() {
+        this.getData('http://127.0.0.1:5000/VPB').then(function (data) {
+          var chart4 = echarts.init(document.getElementById('chart4'));
+          chart4.setOption({
+            xAxis: {},
+            yAxis: {},
+            grid: {
+              left: 30,
+              top: 50,
+              bottom: 20,
+              right: 30
+            },
+            tooltip: {
+              formatter: function formatter(obj) {
+                var value = obj.value;
+                return "".concat(value[2], ": ").concat(value[1]);
+              }
+            },
+            series: [{
+              symbolSize: function symbolSize(data) {
+                return Math.sqrt(data[3]) / 2;
+              },
+              data: data,
+              type: 'scatter'
+            }],
+            color: ['#00FF80']
           });
         });
       },

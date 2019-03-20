@@ -2,15 +2,19 @@
   <div class="show-box">
     <div class="show show-1" id="show1">
       <div class="title">大盘涨跌-饼状图</div>
-      <div class="chart-1" id="chart1"></div>
+      <div class="chart chart-1" id="chart1"></div>
     </div>
     <div class="show show-2" id="show2">
       <div class="title">大盘涨跌-散点图</div>
-      <div class="chart-2" id="chart2"></div>
+      <div class="chart chart-2" id="chart2"></div>
     </div>
     <div class="show show-3" id="show3">
       <div class="title">买/卖平均信息图</div>
-      <div class="chart-3" id="chart3"></div>
+      <div class="chart chart-3" id="chart3"></div>
+    </div>
+    <div class="show show-4" id="show4">
+      <div class="title">大盘涨跌-散点图</div>
+      <div class="chart chart-4" id="chart4"></div>
     </div>
   </div>
 </template>
@@ -30,6 +34,8 @@
               radius : '60%',
               data: data,
               label: {
+                position: 'inside',
+                color: '#495A80',
                 "formatter": '{b}: {d}%'
               },
               itemStyle: {
@@ -41,7 +47,7 @@
               }
             }
           ],
-          color: ['#f00', '#090', '#aeaeae']
+          color: ['#9966CC', '#EAF048', '#F6D6FF']
         })
       })
       this.getData('http://127.0.0.1:5000/distribution').then((data) => {
@@ -72,7 +78,8 @@
                 {type : 'average', name: '平均值'}
               ]
             }
-          }]
+          }],
+          color: ['#82A6F5']
         })
       })
       this.getData('http://127.0.0.1:5000/transactionAve').then((data) => {
@@ -83,6 +90,11 @@
             type: 'category',
             axisTick: {show: false},
             data: ['买/卖1', '买/卖2', '买/卖3', '买/卖4', '买/卖5']
+          },
+          legend: {
+            left: 0,
+            top: 35,
+            data:['平均买价','平均卖价','平均买数','平均卖数']
           },
           yAxis: [
             {
@@ -96,40 +108,95 @@
               type: 'value',
               scale: true,
               name: '平均手数',
-              max: 2500,
+              max: 4000,
               min: 0
             }
           ],
           grid: {
             left: 30,
-            top: 70,
+            top: 100,
             bottom: 20,
             right: 50
           },
           series: [
             {
-              name: 'buy',
+              name: '平均买价',
               type: 'bar',
+              label: {
+                normal: {
+                  show: true,
+                  position: 'inside'
+                }
+              },
               data: data[0]
             },
             {
-              name: 'sell',
+              name: '平均卖价',
               type: 'bar',
+              label: {
+                normal: {
+                  show: true,
+                  position: 'inside'
+                }
+              },
               data: data[2]
             },
             {
-              name: 'sellNumber',
+              name: '平均买数',
               type: 'line',
+              label: {
+                normal: {
+                  show: true,
+                  position: 'top'
+                }
+              },
               yAxisIndex: 1,
               data: data[1]
             },
             {
-              name: 'sellNumber',
+              name: '平均卖数',
               type: 'line',
+              label: {
+                normal: {
+                  show: true,
+                  position: 'top'
+                }
+              },
               yAxisIndex: 1,
               data: data[3]
             }
-          ]
+          ],
+          color: ['#9966CC', '#00FF80', '#495A80', '#f17c67']
+        })
+        this.getChart4()
+      })
+    },
+    getChart4: function () {
+      this.getData('http://127.0.0.1:5000/VPB').then((data) => {
+        const chart4 = echarts.init(document.getElementById('chart4'))
+        chart4.setOption({
+          xAxis: {},
+          yAxis: {},
+          grid: {
+            left: 30,
+            top: 50,
+            bottom: 20,
+            right: 30
+          },
+          tooltip: {
+            formatter: function (obj) {
+              const value = obj.value 
+              return `${value[2]}: ${value[1]}`
+            }
+          },
+          series: [{
+            symbolSize: function(data) {
+              return Math.sqrt(data[3]) / 2;
+            },
+            data: data,
+            type: 'scatter',
+          }],
+          color: ['#00FF80']
         })
       })
     },
@@ -157,6 +224,7 @@
     position: relative;
     border: 1px solid #ccc;
     float: left;
+    box-sizing: border-box;
     .title {
       position: absolute;
       background-color: skyblue;
@@ -167,16 +235,24 @@
       padding: 0 10px;
     }
   }
-  .show-1, .chart-1 {
-    width: 400px;
+  .chart {
+    width: 100%;
+    height: 100%;
+  }
+  .show-1 {
+    width: 300px;
     height: 300px;
   }
-  .show-2, .chart-2 {
-    width: 1000px;
+  .show-2 {
+    width: calc(100% - 300px);
     height: 300px;
   }
-  .show-3, .chart-3 {
+  .show-3 {
     width: 600px;
+    height: 300px;
+  }
+  .show-4 {
+    width: calc(100% - 600px);
     height: 300px;
   }
 </style>
