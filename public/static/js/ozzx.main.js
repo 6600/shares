@@ -272,8 +272,8 @@ window.ozzx = {
               type: 'value',
               scale: true,
               name: '平均价格',
-              max: 40,
-              min: 0
+              max: 20,
+              min: 12
             }, {
               type: 'value',
               scale: true,
@@ -337,6 +337,8 @@ window.ozzx = {
         });
       },
       "getChart4": function getChart4() {
+        var _this2 = this;
+
         this.getData('http://127.0.0.1:5000/VPB').then(function (data) {
           var chart4 = echarts.init(document.getElementById('chart4'));
           chart4.setOption({
@@ -362,6 +364,34 @@ window.ozzx = {
               type: 'scatter'
             }],
             color: ['#00FF80']
+          });
+          setTimeout(function () {
+            _this2.getChart5();
+          }, 0);
+        });
+      },
+      "getChart5": function getChart5() {
+        this.getData('http://127.0.0.1:5000/SB').then(function (data) {
+          var chart5 = echarts.init(document.getElementById('chart5'));
+          chart5.setOption({
+            series: [{
+              name: '内盘/外盘',
+              type: 'pie',
+              radius: '60%',
+              data: data,
+              label: {
+                position: 'inside',
+                "formatter": '{b}: {d}%'
+              },
+              itemStyle: {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+              }
+            }],
+            color: ['#f17c67', '#495A80']
           });
         });
       },

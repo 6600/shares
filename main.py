@@ -168,10 +168,36 @@ def VPB():
     # 筛选出市净率低的
     PB = float(player[44])
     if (PB < 0.95 and PB > 0 and float(player[51]) > 0):
-      VPBList.append([1 / float(player[51]), PB, player[0], float(player[43])])
+      # 内外盘
+      buy = float(player[6])
+      sell = float(player[7])
+      if (sell > 0 and buy > 0):
+        VPBList.append([1 / float(player[51]), PB, player[0], buy / sell * 1000 ])
   return json.dumps({
     "err": 0,
     "data": VPBList
+  })
+
+# 获取内盘外盘信息 饼状图
+@app.route("/SB")
+def SB():
+  number = 0
+  buyTotal = 0
+  sellTotal = 0
+  
+  for player in secondFloor:
+    buy = float(player[6])
+    sell = float(player[7])
+    if (sell > 0 and buy > 0):
+      buyTotal += buy
+      sellTotal += sell
+      number += 1
+  return json.dumps({
+    "err": 0,
+    "data": [
+      {"value": int(sellTotal / number), "name":'卖出'},
+      {"value": int(buyTotal / number), "name":'买入'}
+    ]
   })
 
 if __name__ == '__main__':

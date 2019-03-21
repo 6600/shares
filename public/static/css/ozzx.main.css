@@ -41,7 +41,8 @@ body, html, .ox {
   height: 100%;
 }
 
-.ox-home .show-1 {
+.ox-home .show-1,
+.ox-home .show-5 {
   width: 300px;
   height: 300px;
 }

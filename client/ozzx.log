@@ -3005,3 +3005,144 @@
 [2019-03-21T21:46:19.664] [INFO] main.js - Compile successfully, Use time: 1587 msec!
 [2019-03-21T21:46:19.671] [INFO] tool.js - 读取成功: C:\Users\my\Documents\GitHub\pack\core\debug\autoReload.js
 [2019-03-21T21:46:19.672] [INFO] tool.js - 写入文件: C:\Users\my\Documents\GitHub\shares\public\static\js\autoReload.js
+[2019-03-21T21:57:19.153] [INFO] main.js - file change: C:\Users\my\Documents\GitHub\shares\client\src\page\home.page
+[2019-03-21T21:57:19.153] [INFO] main.js - --------------------------- 开始编译 ---------------------------
+[2019-03-21T21:57:19.153] [INFO] main.js - 程序运行目录: C:\Users\my\Documents\GitHub\shares\client
+[2019-03-21T21:57:19.153] [INFO] main.js - 刷新模式,变化目录: C:\Users\my\Documents\GitHub\shares\client\src\page\home.page
+[2019-03-21T21:57:19.153] [INFO] main.js - 读取模板文件: C:\Users\my\Documents\GitHub\pack\index.html
+[2019-03-21T21:57:19.154] [DEBUG] main.js - 读取网页标题: 页面
+[2019-03-21T21:57:19.154] [DEBUG] main.js - 处理页面源信息: [{"http-equiv":"content-type","content":"text/html; charset=UTF-8"},{"name":"viewport","content":"initial-scale=1,user-scalable=no,maximum-scale=1"}]
+[2019-03-21T21:57:19.189] [DEBUG] index.js - 页面中使用到的动画列表: [object Set]
+[2019-03-21T21:57:19.191] [INFO] main.js - 写文件: C:\Users\my\Documents\GitHub\shares\public\static\css\ozzx.animation.css
+[2019-03-21T21:57:19.192] [DEBUG] main.js - 页面中不包含切换动画!
+[2019-03-21T21:57:19.325] [DEBUG] main.js - 处理引用脚本: [{"name":"echarts","src":"https://echarts.baidu.com/dist/echarts.common.min.js"}]
+[2019-03-21T21:57:19.325] [DEBUG] main.js - 外部脚本数量: 1
+[2019-03-21T21:57:19.325] [DEBUG] main.js - 处理脚本: echarts
+[2019-03-21T21:57:19.325] [DEBUG] main.js - 网络脚本: echarts
+[2019-03-21T21:57:19.325] [DEBUG] main.js - 完成外部脚本引用处理!
+[2019-03-21T21:57:19.325] [DEBUG] main.js - 判断是否可以输出Html!
+[2019-03-21T21:57:19.459] [DEBUG] main.js - 判断是否可以输出Html!
+[2019-03-21T21:57:19.460] [INFO] main.js - Compile successfully, Use time: 307 msec!
+[2019-03-21T21:57:35.391] [INFO] main.js - file change: C:\Users\my\Documents\GitHub\shares\client\src\page\home.page
+[2019-03-21T21:57:35.391] [INFO] main.js - --------------------------- 开始编译 ---------------------------
+[2019-03-21T21:57:35.391] [INFO] main.js - 程序运行目录: C:\Users\my\Documents\GitHub\shares\client
+[2019-03-21T21:57:35.391] [INFO] main.js - 刷新模式,变化目录: C:\Users\my\Documents\GitHub\shares\client\src\page\home.page
+[2019-03-21T21:57:35.391] [INFO] main.js - 读取模板文件: C:\Users\my\Documents\GitHub\pack\index.html
+[2019-03-21T21:57:35.392] [DEBUG] main.js - 读取网页标题: 页面
+[2019-03-21T21:57:35.392] [DEBUG] main.js - 处理页面源信息: [{"http-equiv":"content-type","content":"text/html; charset=UTF-8"},{"name":"viewport","content":"initial-scale=1,user-scalable=no,maximum-scale=1"}]
+[2019-03-21T21:57:35.422] [DEBUG] index.js - 页面中使用到的动画列表: [object Set]
+[2019-03-21T21:57:35.424] [INFO] main.js - 写文件: C:\Users\my\Documents\GitHub\shares\public\static\css\ozzx.animation.css
+[2019-03-21T21:57:35.425] [DEBUG] main.js - 页面中不包含切换动画!
+[2019-03-21T21:57:35.489] [DEBUG] main.js - 处理引用脚本: [{"name":"echarts","src":"https://echarts.baidu.com/dist/echarts.common.min.js"}]
+[2019-03-21T21:57:35.489] [DEBUG] main.js - 外部脚本数量: 1
+[2019-03-21T21:57:35.489] [DEBUG] main.js - 处理脚本: echarts
+[2019-03-21T21:57:35.489] [DEBUG] main.js - 网络脚本: echarts
+[2019-03-21T21:57:35.489] [DEBUG] main.js - 完成外部脚本引用处理!
+[2019-03-21T21:57:35.489] [DEBUG] main.js - 判断是否可以输出Html!
+[2019-03-21T21:57:35.616] [DEBUG] main.js - 判断是否可以输出Html!
+[2019-03-21T21:57:35.617] [INFO] main.js - Compile successfully, Use time: 226 msec!
+[2019-03-21T22:34:02.337] [INFO] main.js - file change: C:\Users\my\Documents\GitHub\shares\client\src\page\home.page
+[2019-03-21T22:34:40.082] [INFO] main.js - --------------------------- 开始编译 ---------------------------
+[2019-03-21T22:34:40.085] [INFO] main.js - 程序运行目录: C:\Users\my\Documents\GitHub\shares\client
+[2019-03-21T22:34:40.085] [INFO] main.js - 首次启动!
+[2019-03-21T22:34:40.085] [INFO] main.js - 生成版本号: gg9r20j7yj9
+[2019-03-21T22:34:40.087] [INFO] main.js - 清理资源文件夹: C:\Users\my\Documents\GitHub\shares\public\static
+[2019-03-21T22:34:40.087] [INFO] tool.js - 文件夹不存在: C:\Users\my\Documents\GitHub\shares\public\static
+[2019-03-21T22:34:40.088] [INFO] tool.js - 创建文件夹: C:\Users\my\Documents\GitHub\shares\public\static
+[2019-03-21T22:34:40.088] [INFO] main.js - 读取模板文件: C:\Users\my\Documents\GitHub\pack\index.html
+[2019-03-21T22:34:40.088] [DEBUG] main.js - 读取网页标题: 页面
+[2019-03-21T22:34:40.088] [DEBUG] main.js - 处理页面源信息: [{"http-equiv":"content-type","content":"text/html; charset=UTF-8"},{"name":"viewport","content":"initial-scale=1,user-scalable=no,maximum-scale=1"}]
+[2019-03-21T22:34:40.247] [DEBUG] index.js - 页面中使用到的动画列表: [object Set]
+[2019-03-21T22:34:40.252] [INFO] tool.js - 文件夹不存在: C:\Users\my\Documents\GitHub\shares\public\static\resource
+[2019-03-21T22:34:40.252] [INFO] tool.js - 创建文件夹: C:\Users\my\Documents\GitHub\shares\public\static\resource
+[2019-03-21T22:34:40.267] [INFO] tool.js - 文件夹不存在: C:\Users\my\Documents\GitHub\shares\public\static\css
+[2019-03-21T22:34:40.267] [INFO] tool.js - 创建文件夹: C:\Users\my\Documents\GitHub\shares\public\static\css
+[2019-03-21T22:34:40.267] [INFO] main.js - 写文件: C:\Users\my\Documents\GitHub\shares\public\static\css\ozzx.animation.css
+[2019-03-21T22:34:40.268] [DEBUG] main.js - 页面中不包含切换动画!
+[2019-03-21T22:34:41.235] [INFO] tool.js - 文件夹不存在: C:\Users\my\Documents\GitHub\shares\public\static\js
+[2019-03-21T22:34:41.235] [INFO] tool.js - 创建文件夹: C:\Users\my\Documents\GitHub\shares\public\static\js
+[2019-03-21T22:34:41.236] [INFO] tool.js - 读取文件: C:\Users\my\Documents\GitHub\pack\core\debug\autoReload.js
+[2019-03-21T22:34:41.237] [DEBUG] main.js - 处理引用脚本: [{"name":"echarts","src":"https://echarts.baidu.com/dist/echarts.common.min.js"}]
+[2019-03-21T22:34:41.237] [DEBUG] main.js - 外部脚本数量: 1
+[2019-03-21T22:34:41.237] [DEBUG] main.js - 处理脚本: echarts
+[2019-03-21T22:34:41.237] [DEBUG] main.js - 网络脚本: echarts
+[2019-03-21T22:34:41.237] [DEBUG] main.js - 完成外部脚本引用处理!
+[2019-03-21T22:34:41.237] [DEBUG] main.js - 判断是否可以输出Html!
+[2019-03-21T22:34:41.237] [INFO] main.js - 监控文件夹变化: C:\Users\my\Documents\GitHub\shares\client\src
+[2019-03-21T22:34:41.249] [INFO] main.js - 服务器运行在: 127.0.0.1:8000
+[2019-03-21T22:34:41.453] [DEBUG] main.js - 判断是否可以输出Html!
+[2019-03-21T22:34:41.455] [INFO] main.js - Compile successfully, Use time: 1373 msec!
+[2019-03-21T22:34:41.462] [INFO] tool.js - 读取成功: C:\Users\my\Documents\GitHub\pack\core\debug\autoReload.js
+[2019-03-21T22:34:41.463] [INFO] tool.js - 写入文件: C:\Users\my\Documents\GitHub\shares\public\static\js\autoReload.js
+[2019-03-21T22:54:29.631] [INFO] main.js - file change: C:\Users\my\Documents\GitHub\shares\client\src\page\home.page
+[2019-03-21T22:54:29.631] [INFO] main.js - --------------------------- 开始编译 ---------------------------
+[2019-03-21T22:54:29.631] [INFO] main.js - 程序运行目录: C:\Users\my\Documents\GitHub\shares\client
+[2019-03-21T22:54:29.631] [INFO] main.js - 刷新模式,变化目录: C:\Users\my\Documents\GitHub\shares\client\src\page\home.page
+[2019-03-21T22:54:29.631] [INFO] main.js - 读取模板文件: C:\Users\my\Documents\GitHub\pack\index.html
+[2019-03-21T22:54:29.632] [DEBUG] main.js - 读取网页标题: 页面
+[2019-03-21T22:54:29.632] [DEBUG] main.js - 处理页面源信息: [{"http-equiv":"content-type","content":"text/html; charset=UTF-8"},{"name":"viewport","content":"initial-scale=1,user-scalable=no,maximum-scale=1"}]
+[2019-03-21T22:54:29.669] [DEBUG] index.js - 页面中使用到的动画列表: [object Set]
+[2019-03-21T22:54:29.672] [INFO] main.js - 写文件: C:\Users\my\Documents\GitHub\shares\public\static\css\ozzx.animation.css
+[2019-03-21T22:54:29.672] [DEBUG] main.js - 页面中不包含切换动画!
+[2019-03-21T22:54:29.817] [DEBUG] main.js - 处理引用脚本: [{"name":"echarts","src":"https://echarts.baidu.com/dist/echarts.common.min.js"}]
+[2019-03-21T22:54:29.817] [DEBUG] main.js - 外部脚本数量: 1
+[2019-03-21T22:54:29.817] [DEBUG] main.js - 处理脚本: echarts
+[2019-03-21T22:54:29.817] [DEBUG] main.js - 网络脚本: echarts
+[2019-03-21T22:54:29.817] [DEBUG] main.js - 完成外部脚本引用处理!
+[2019-03-21T22:54:29.817] [DEBUG] main.js - 判断是否可以输出Html!
+[2019-03-21T22:54:29.957] [DEBUG] main.js - 判断是否可以输出Html!
+[2019-03-21T22:54:29.958] [INFO] main.js - Compile successfully, Use time: 327 msec!
+[2019-03-21T23:06:19.382] [INFO] main.js - file change: C:\Users\my\Documents\GitHub\shares\client\src\page\home.page
+[2019-03-21T23:06:19.382] [INFO] main.js - --------------------------- 开始编译 ---------------------------
+[2019-03-21T23:06:19.382] [INFO] main.js - 程序运行目录: C:\Users\my\Documents\GitHub\shares\client
+[2019-03-21T23:06:19.382] [INFO] main.js - 刷新模式,变化目录: C:\Users\my\Documents\GitHub\shares\client\src\page\home.page
+[2019-03-21T23:06:19.382] [INFO] main.js - 读取模板文件: C:\Users\my\Documents\GitHub\pack\index.html
+[2019-03-21T23:06:19.383] [DEBUG] main.js - 读取网页标题: 页面
+[2019-03-21T23:06:19.383] [DEBUG] main.js - 处理页面源信息: [{"http-equiv":"content-type","content":"text/html; charset=UTF-8"},{"name":"viewport","content":"initial-scale=1,user-scalable=no,maximum-scale=1"}]
+[2019-03-21T23:06:19.415] [DEBUG] index.js - 页面中使用到的动画列表: [object Set]
+[2019-03-21T23:06:19.418] [INFO] main.js - 写文件: C:\Users\my\Documents\GitHub\shares\public\static\css\ozzx.animation.css
+[2019-03-21T23:06:19.419] [DEBUG] main.js - 页面中不包含切换动画!
+[2019-03-21T23:06:19.506] [DEBUG] main.js - 处理引用脚本: [{"name":"echarts","src":"https://echarts.baidu.com/dist/echarts.common.min.js"}]
+[2019-03-21T23:06:19.506] [DEBUG] main.js - 外部脚本数量: 1
+[2019-03-21T23:06:19.506] [DEBUG] main.js - 处理脚本: echarts
+[2019-03-21T23:06:19.506] [DEBUG] main.js - 网络脚本: echarts
+[2019-03-21T23:06:19.506] [DEBUG] main.js - 完成外部脚本引用处理!
+[2019-03-21T23:06:19.506] [DEBUG] main.js - 判断是否可以输出Html!
+[2019-03-21T23:06:19.634] [DEBUG] main.js - 判断是否可以输出Html!
+[2019-03-21T23:06:19.635] [INFO] main.js - Compile successfully, Use time: 253 msec!
+[2019-03-21T23:06:46.592] [INFO] main.js - file change: C:\Users\my\Documents\GitHub\shares\client\src\page\home.page
+[2019-03-21T23:06:46.592] [INFO] main.js - --------------------------- 开始编译 ---------------------------
+[2019-03-21T23:06:46.592] [INFO] main.js - 程序运行目录: C:\Users\my\Documents\GitHub\shares\client
+[2019-03-21T23:06:46.592] [INFO] main.js - 刷新模式,变化目录: C:\Users\my\Documents\GitHub\shares\client\src\page\home.page
+[2019-03-21T23:06:46.592] [INFO] main.js - 读取模板文件: C:\Users\my\Documents\GitHub\pack\index.html
+[2019-03-21T23:06:46.593] [DEBUG] main.js - 读取网页标题: 页面
+[2019-03-21T23:06:46.593] [DEBUG] main.js - 处理页面源信息: [{"http-equiv":"content-type","content":"text/html; charset=UTF-8"},{"name":"viewport","content":"initial-scale=1,user-scalable=no,maximum-scale=1"}]
+[2019-03-21T23:06:46.624] [DEBUG] index.js - 页面中使用到的动画列表: [object Set]
+[2019-03-21T23:06:46.626] [INFO] main.js - 写文件: C:\Users\my\Documents\GitHub\shares\public\static\css\ozzx.animation.css
+[2019-03-21T23:06:46.626] [DEBUG] main.js - 页面中不包含切换动画!
+[2019-03-21T23:06:46.688] [DEBUG] main.js - 处理引用脚本: [{"name":"echarts","src":"https://echarts.baidu.com/dist/echarts.common.min.js"}]
+[2019-03-21T23:06:46.688] [DEBUG] main.js - 外部脚本数量: 1
+[2019-03-21T23:06:46.688] [DEBUG] main.js - 处理脚本: echarts
+[2019-03-21T23:06:46.688] [DEBUG] main.js - 网络脚本: echarts
+[2019-03-21T23:06:46.688] [DEBUG] main.js - 完成外部脚本引用处理!
+[2019-03-21T23:06:46.688] [DEBUG] main.js - 判断是否可以输出Html!
+[2019-03-21T23:06:46.814] [DEBUG] main.js - 判断是否可以输出Html!
+[2019-03-21T23:06:46.815] [INFO] main.js - Compile successfully, Use time: 223 msec!
+[2019-03-21T23:06:51.625] [INFO] main.js - file change: C:\Users\my\Documents\GitHub\shares\client\src\page\home.page
+[2019-03-21T23:06:51.625] [INFO] main.js - --------------------------- 开始编译 ---------------------------
+[2019-03-21T23:06:51.625] [INFO] main.js - 程序运行目录: C:\Users\my\Documents\GitHub\shares\client
+[2019-03-21T23:06:51.625] [INFO] main.js - 刷新模式,变化目录: C:\Users\my\Documents\GitHub\shares\client\src\page\home.page
+[2019-03-21T23:06:51.625] [INFO] main.js - 读取模板文件: C:\Users\my\Documents\GitHub\pack\index.html
+[2019-03-21T23:06:51.626] [DEBUG] main.js - 读取网页标题: 页面
+[2019-03-21T23:06:51.626] [DEBUG] main.js - 处理页面源信息: [{"http-equiv":"content-type","content":"text/html; charset=UTF-8"},{"name":"viewport","content":"initial-scale=1,user-scalable=no,maximum-scale=1"}]
+[2019-03-21T23:06:51.659] [DEBUG] index.js - 页面中使用到的动画列表: [object Set]
+[2019-03-21T23:06:51.661] [INFO] main.js - 写文件: C:\Users\my\Documents\GitHub\shares\public\static\css\ozzx.animation.css
+[2019-03-21T23:06:51.661] [DEBUG] main.js - 页面中不包含切换动画!
+[2019-03-21T23:06:51.761] [DEBUG] main.js - 处理引用脚本: [{"name":"echarts","src":"https://echarts.baidu.com/dist/echarts.common.min.js"}]
+[2019-03-21T23:06:51.761] [DEBUG] main.js - 外部脚本数量: 1
+[2019-03-21T23:06:51.761] [DEBUG] main.js - 处理脚本: echarts
+[2019-03-21T23:06:51.761] [DEBUG] main.js - 网络脚本: echarts
+[2019-03-21T23:06:51.761] [DEBUG] main.js - 完成外部脚本引用处理!
+[2019-03-21T23:06:51.761] [DEBUG] main.js - 判断是否可以输出Html!
+[2019-03-21T23:06:51.896] [DEBUG] main.js - 判断是否可以输出Html!
+[2019-03-21T23:06:51.897] [INFO] main.js - Compile successfully, Use time: 272 msec!
