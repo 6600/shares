@@ -121,6 +121,10 @@ def transactionAve():
   sellNumber = [0, 0, 0, 0, 0]
   length = len(secondFloor)
   for player in secondFloor:
+    if (float(player[8]) == 0):
+      print(player[0] + '买卖数据为空，排除!')
+      length -= 1
+      continue
     buyPrice[0] += float(player[8])
     buyNumber[0] += float(player[9])
     buyPrice[1] += float(player[10])
