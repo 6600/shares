@@ -20,6 +20,8 @@
       <div class="title">买入/卖出意愿-饼状图</div>
       <div class="chart chart-5" id="chart5"></div>
     </div>
+    <img class="menu-icon" src="@&menu.svg&" @click="$dom('rightBar').classList.add('right-bar-active')"/>
+    <div class="right-bar" @name="rightBar"></div>
   </div>
 </template>
 
@@ -28,7 +30,7 @@
     data: {
     },
     created: function () {
-      this.getData('http://127.0.0.1:5000/show1').then((data) => {
+      this.getData('/show1').then((data) => {
         const chart1 = echarts.init(document.getElementById('chart1'))
         chart1.setOption({
           series : [
@@ -54,7 +56,7 @@
           color: ['#9966CC', '#EAF048', '#F6D6FF']
         })
       })
-      this.getData('http://127.0.0.1:5000/distribution').then((data) => {
+      this.getData('/distribution').then((data) => {
         const chart2 = echarts.init(document.getElementById('chart2'))
         chart2.setOption({
           xAxis: {
@@ -86,7 +88,7 @@
           color: ['#82A6F5']
         })
       })
-      this.getData('http://127.0.0.1:5000/transactionAve').then((data) => {
+      this.getData('/transactionAve').then((data) => {
         const chart2 = echarts.init(document.getElementById('chart3'))
         console.log(data[0])
         chart2.setOption({
@@ -176,7 +178,7 @@
       })
     },
     getChart4: function () {
-      this.getData('http://127.0.0.1:5000/VPB').then((data) => {
+      this.getData('/VPB').then((data) => {
         const chart4 = echarts.init(document.getElementById('chart4'))
         chart4.setOption({
           xAxis: {},
@@ -208,7 +210,7 @@
       })
     },
     getChart5: function () {
-      this.getData('http://127.0.0.1:5000/SB').then((data) => {
+      this.getData('/SB').then((data) => {
         const chart5 = echarts.init(document.getElementById('chart5'))
         chart5.setOption({
           series : [
@@ -288,5 +290,24 @@
   .show-4 {
     width: calc(100% - 600px);
     height: 300px;
+  }
+  .menu-icon {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+  }
+  .right-bar {
+    right: -200px;
+    height: 100%;
+    width: 199px;
+    position: fixed;
+    background-color: white;
+    border-left: 1px solid #ccc;
+  }
+  .right-bar-active {
+    right: 0px;
   }
 </style>

@@ -10,14 +10,33 @@ import time
 from flask import Flask
 from flask_cors import *
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='public', static_url_path='/public')
+
 CORS(app, supports_credentials=True)
 
-# 今天日期
-date = time.strftime('%Y.%m.%d',time.localtime(time.time()))
+tempData = ''
+tempTime = 0
 
-# 判断是否已经获取到了当天的数据
-if not os.path.exists('./history/' + date + '.csv'):
+def getData2 (summary, tempList):
+  listString = ','.join(tempList)
+  data = requests.get(url='http://qt.gtimg.cn/q=' + listString).text
+  sharesList = re.findall(r"=\"1\~(.+?)\";", data)
+
+  # 去掉空数据
+  for sz in sharesList:
+    sz = sz.replace("~~", "~")
+    summary += sz.replace("~",",") + '\n'
+  return summary
+
+
+def getData ():
+  global tempData
+  global tempTime
+  if (int(time.time()) - tempTime < 30):
+    return tempData
+  # 今天日期
+  date = time.strftime('%Y.%m.%d',time.localtime(time.time()))
+
   # 读取上证指数列表
   szListFile = open('sz.json', 'r', encoding='utf-8').read()
   szList = json.loads(szListFile)
@@ -26,53 +45,30 @@ if not os.path.exists('./history/' + date + '.csv'):
   
   # 每50个提交一次
   tempList = []
-  def getData ():
-    listString = ','.join(tempList)
-    data = requests.get(url='http://qt.gtimg.cn/q=' + listString).text
-    sharesList = re.findall(r"=\"1\~(.+?)\";", data)
 
-    # 去掉空数据
-    for sz in sharesList:
-      global summary
-      sz = sz.replace("~~", "~")
-      summary += sz.replace("~",",") + '\n'
 
   for sz in szList:
     if len(tempList) >= 50:
-      getData()
+      summary = getData2(summary, tempList)
       tempList = []
     tempList.append(sz['id'])
 
-  getData()
+  summary = getData2(summary, tempList)
 
-  file_path = './history/' + date + '.csv'
-  with open(file_path, mode='w', encoding='utf_8_sig') as file_obj:
-    file_obj.write(summary)
+  # 清洗数据
+  secondFloor = []
 
+  index = 0
+  for temp in summary.split('\n'):
+    # 过滤掉空数据 并且过滤掉表头
+    if (temp != "" and index != 0):
+      secondFloor.append(temp.split(','))
+    index += 1
+  
+  tempData = secondFloor
+  tempTime = int(time.time())
+  return secondFloor
 
-# 总交易价格
-allTraAmount = 0
-
-# 读取上证数据
-firstFloor = open('./history/' + date + '.csv', 'r', encoding='utf_8_sig').read().split('\n')
-# 清洗数据
-secondFloor = []
-
-index = 0
-for temp in firstFloor:
-  # 过滤掉空数据 并且过滤掉表头
-  if (temp != "" and index != 0):
-    secondFloor.append(temp.split(','))
-  index += 1
-
-print("数据总条数: " + str(len(secondFloor)))
-
-
-  # 增加价格
-  # allTraAmount += player['traPri']
-
-# print('今日: [%s] 只股票赢了 [%s] 只股票输了 [%s] 只股票在观望!' % (str(len(winList)), str(len(lostList)), str(len(flatList))))
-# print('成交金额 [%s], 平均成交金额 [%s]' % (str(allTraAmount), str(allTraAmount / len(todayData))))
 
 @app.route("/show1")
 def show1():
@@ -82,7 +78,7 @@ def show1():
   winList = []
   # 没有涨没有跌的
   flatList = []
-  for player in secondFloor:
+  for player in getData():
     win = float(player[30])
     if win > 0:
       winList.append(player)
@@ -104,7 +100,7 @@ def show1():
 def distribution():
   distributionList = []
   ind = 0
-  for player in secondFloor:
+  for player in getData():
     distributionList.append([ind, player[31], player[0]])
     ind += 1
   return json.dumps({
@@ -115,6 +111,7 @@ def distribution():
 # 获取分布情况
 @app.route("/transactionAve")
 def transactionAve():
+  secondFloor = getData()
   buyPrice = [0, 0, 0, 0, 0]
   buyNumber = [0, 0, 0, 0, 0]
   sellPrice = [0, 0, 0, 0, 0]
@@ -164,6 +161,7 @@ def transactionAve():
 @app.route("/VPB")
 def VPB():
   VPBList = []
+  secondFloor = getData()
   for player in secondFloor:
     # 筛选出市净率低的
     PB = float(player[44])
@@ -184,7 +182,7 @@ def SB():
   number = 0
   buyTotal = 0
   sellTotal = 0
-  
+  secondFloor = getData()
   for player in secondFloor:
     buy = float(player[6])
     sell = float(player[7])
@@ -201,4 +199,7 @@ def SB():
   })
 
 if __name__ == '__main__':
-  app.run()
+  app.run(
+    host='0.0.0.0',
+    port= 8003
+  )
