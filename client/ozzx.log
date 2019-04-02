@@ -1,34 +1,34 @@
-22:20:06.125 DEBUG 获取到配置信息: 
-22:20:06.125 DEBUG {"outPut":{"minifyCss":true,"minifyJs":true,"outFileAddVersion":true},"root":"/src","entry":"home","title":"页面","outFolder":"../public","resourceFolder":"./src/resource","headList":[{"http-equiv":"content-type","content":"text/html; charset=UTF-8"},{"name":"viewport","content":"initial-scale=1,user-scalable=no,maximum-scale=1"}],"scriptList":[{"name":"echarts","src":"https://echarts.baidu.com/dist/echarts.common.min.js"}],"styleList":[],"pageList":[{"main":true,"isPage":true,"name":"home","src":"./src/page/home.page","temple":"<temple name=\"home\" src=\"./src/page/home.page\" isPage=\"true\"></temple>"}],"dev":{"watcher":{"enable":true,"ignored":"./dist/*","depth":99},"outPut":{"minifyCss":false,"minifyJs":false,"outFileAddVersion":false},"serverPort":8000,"server":true,"autoReload":true},"build":{"outPut":{"minifyCss":true,"minifyJs":true,"outFileAddVersion":true}}} 
-22:20:06.126 INFO  --------------------------- 开始编译 --------------------------- 
-22:20:06.126 INFO  程序运行目录: C:\Users\my\Documents\GitHub\shares\client 
-22:20:06.126 INFO  首次启动! 
-22:20:06.126 INFO  生成版本号: ojsbxw3ttz 
-22:20:06.128 INFO  清理资源文件夹: C:\Users\my\Documents\GitHub\shares\public\static 
-22:20:06.128 INFO  文件夹不存在: C:\Users\my\Documents\GitHub\shares\public\static 
-22:20:06.128 INFO  创建文件夹: C:\Users\my\Documents\GitHub\shares\public\static 
-22:20:06.128 INFO  读取模板文件: C:\Users\my\Documents\GitHub\pack\index.html 
-22:20:06.129 DEBUG 读取网页标题: 页面 
-22:20:06.129 DEBUG 处理页面源信息: [{"http-equiv":"content-type","content":"text/html; charset=UTF-8"},{"name":"viewport","content":"initial-scale=1,user-scalable=no,maximum-scale=1"}] 
-22:20:06.292 DEBUG 页面中使用到的动画列表: [object Set] 
-22:20:06.296 INFO  文件夹不存在: C:\Users\my\Documents\GitHub\shares\public\static\resource 
-22:20:06.296 INFO  创建文件夹: C:\Users\my\Documents\GitHub\shares\public\static\resource 
-22:20:06.313 INFO  文件夹不存在: C:\Users\my\Documents\GitHub\shares\public\static\css 
-22:20:06.313 INFO  创建文件夹: C:\Users\my\Documents\GitHub\shares\public\static\css 
-22:20:06.313 INFO  写文件: C:\Users\my\Documents\GitHub\shares\public\static\css\ozzx.animation.css 
-22:20:06.313 DEBUG 页面中不包含切换动画! 
-22:20:07.393 INFO  文件夹不存在: C:\Users\my\Documents\GitHub\shares\public\static\js 
-22:20:07.394 INFO  创建文件夹: C:\Users\my\Documents\GitHub\shares\public\static\js 
-22:20:07.395 DEBUG 处理引用脚本: [{"name":"echarts","src":"https://echarts.baidu.com/dist/echarts.common.min.js"}] 
-22:20:07.395 DEBUG 外部脚本数量: 1 
-22:20:07.395 DEBUG 处理脚本: echarts 
-22:20:07.395 DEBUG 网络脚本: echarts 
-22:20:07.395 DEBUG 完成外部脚本引用处理! 
-22:20:07.395 DEBUG 判断是否可以输出Html! 
-22:20:07.395 DEBUG 还有没有经过处理的资源! 
-22:20:07.597 DEBUG 需要经过特殊处理的css: [[".ox-home .show-box ",".ox-home "]] 
-22:20:07.597 DEBUG 判断是否可以输出Html! 
-22:20:07.597 DEBUG 准备输出html! 
-22:20:07.597 INFO  读取文件: C:\Users\my\Documents\GitHub\shares\client\src\resource\menu.svg 
-22:20:07.602 INFO  读取成功: C:\Users\my\Documents\GitHub\shares\client\src\resource\menu.svg 
-22:20:07.603 INFO  写入文件: C:\Users\my\Documents\GitHub\shares\public\static\resource\menu.svg 
+22:59:05.376 DEBUG 获取到配置信息: 
+22:59:05.376 DEBUG {"outPut":{"minifyCss":true,"minifyJs":true,"outFileAddVersion":true},"root":"/src","entry":"home","title":"页面","outFolder":"../public","resourceFolder":"./src/resource","headList":[{"http-equiv":"content-type","content":"text/html; charset=UTF-8"},{"name":"viewport","content":"initial-scale=1,user-scalable=no,maximum-scale=1"}],"scriptList":[{"name":"echarts","src":"https://echarts.baidu.com/dist/echarts.common.min.js"}],"styleList":[],"pageList":[{"main":true,"isPage":true,"name":"home","src":"./src/page/home.page","temple":"<temple name=\"home\" src=\"./src/page/home.page\" isPage=\"true\"></temple>"}],"dev":{"watcher":{"enable":true,"ignored":"./dist/*","depth":99},"outPut":{"minifyCss":false,"minifyJs":false,"outFileAddVersion":false},"serverPort":8000,"server":true,"autoReload":true},"build":{"outPut":{"minifyCss":true,"minifyJs":true,"outFileAddVersion":true}}} 
+22:59:05.376 INFO  --------------------------- 开始编译 --------------------------- 
+22:59:05.376 INFO  程序运行目录: C:\Users\my\Documents\GitHub\shares\client 
+22:59:05.376 INFO  首次启动! 
+22:59:05.376 INFO  生成版本号: w9ec440q2q 
+22:59:05.379 INFO  清理资源文件夹: C:\Users\my\Documents\GitHub\shares\public\static 
+22:59:05.379 INFO  文件夹不存在: C:\Users\my\Documents\GitHub\shares\public\static 
+22:59:05.379 INFO  创建文件夹: C:\Users\my\Documents\GitHub\shares\public\static 
+22:59:05.379 INFO  读取模板文件: C:\Users\my\Documents\GitHub\pack\index.html 
+22:59:05.380 DEBUG 读取网页标题: 页面 
+22:59:05.380 DEBUG 处理页面源信息: [{"http-equiv":"content-type","content":"text/html; charset=UTF-8"},{"name":"viewport","content":"initial-scale=1,user-scalable=no,maximum-scale=1"}] 
+22:59:05.535 INFO  文件夹不存在: C:\Users\my\Documents\GitHub\shares\public\static\resource 
+22:59:05.536 INFO  创建文件夹: C:\Users\my\Documents\GitHub\shares\public\static\resource 
+22:59:05.550 INFO  工程中只有一个页面! 
+22:59:05.550 INFO  文件夹不存在: C:\Users\my\Documents\GitHub\shares\public\static\css 
+22:59:05.551 INFO  创建文件夹: C:\Users\my\Documents\GitHub\shares\public\static\css 
+22:59:05.551 INFO  写文件: C:\Users\my\Documents\GitHub\shares\public\static\css\ozzx.animation.css 
+22:59:05.551 DEBUG 页面中不包含切换动画! 
+22:59:06.554 INFO  文件夹不存在: C:\Users\my\Documents\GitHub\shares\public\static\js 
+22:59:06.554 INFO  创建文件夹: C:\Users\my\Documents\GitHub\shares\public\static\js 
+22:59:06.555 DEBUG 处理引用脚本: [{"name":"echarts","src":"https://echarts.baidu.com/dist/echarts.common.min.js"}] 
+22:59:06.555 DEBUG 外部脚本数量: 1 
+22:59:06.555 DEBUG 处理脚本: echarts 
+22:59:06.555 DEBUG 网络脚本: echarts 
+22:59:06.555 DEBUG 完成外部脚本引用处理! 
+22:59:06.555 DEBUG 判断是否可以输出Html! 
+22:59:06.555 DEBUG 还有没有经过处理的资源! 
+22:59:06.758 DEBUG 需要经过特殊处理的css: [[".ox-home .show-box ",".ox-home "]] 
+22:59:06.758 DEBUG 判断是否可以输出Html! 
+22:59:06.758 DEBUG 准备输出html! 
+22:59:06.759 INFO  读取文件: C:\Users\my\Documents\GitHub\shares\client\src\resource\menu.svg 
+22:59:06.763 INFO  读取成功: C:\Users\my\Documents\GitHub\shares\client\src\resource\menu.svg 
+22:59:06.764 INFO  写入文件: C:\Users\my\Documents\GitHub\shares\public\static\resource\menu.svg 

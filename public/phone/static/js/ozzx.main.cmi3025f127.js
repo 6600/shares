@@ -37,28 +37,18 @@ pgNameHandler(childrenDom);}}// 便捷获取被命名的dom元素
 function $dom(domName){return ozzx.domList[domName];}// 跳转到指定页面
 function $go(pageName,inAnimation,outAnimation,param){ozzx.state.animation={in:inAnimation,out:outAnimation};var paramString='';if(param&&_typeof(param)=='object'){paramString+='?';// 生成URL参数
 for(var paramKey in param){paramString+=paramKey+'='+param[paramKey]+'&';}// 去掉尾端的&
-paramString=paramString.slice(0,-1);}window.location.href=paramString+"#"+pageName;}// 页面资源加载完毕事件
-function ready(){var page=ozzx.entry;window.ozzx.activePage=page;// 更改$data链接
-$data=ozzx.script[page].data;var entryDom=document.getElementById('ox-'+page);if(entryDom){runPageFunction(page,entryDom);}else{console.error('找不到页面入口! 设置的入口为: '+page);}}/*
- * 传递函数给whenReady()
- * 当文档解析完毕且为操作准备就绪时，函数作为document的方法调用
- */var whenReady=function(){//这个函数返回whenReady()函数
-var funcs=[];//当获得事件时，要运行的函数
-var ready=false;//当触发事件处理程序时,切换为true
-//当文档就绪时,调用事件处理程序
-function handler(e){if(ready)return;//确保事件处理程序只完整运行一次
-//如果发生onreadystatechange事件，但其状态不是complete的话,那么文档尚未准备好
-if(e.type==='onreadystatechange'&&document.readyState!=='complete'){return;}//运行所有注册函数
-//注意每次都要计算funcs.length
-//以防这些函数的调用可能会导致注册更多的函数
-for(var i=0;i<funcs.length;i++){funcs[i].call(document);}//事件处理函数完整执行,切换ready状态, 并移除所有函数
-ready=true;funcs=null;}//为接收到的任何事件注册处理程序
-if(document.addEventListener){document.addEventListener('DOMContentLoaded',handler,false);document.addEventListener('readystatechange',handler,false);//IE9+
-window.addEventListener('load',handler,false);}else if(document.attachEvent){document.attachEvent('onreadystatechange',handler);window.attachEvent('onload',handler);}//返回whenReady()函数
-return function whenReady(fn){if(ready){fn.call(document);}else{funcs.push(fn);}};}();whenReady(ready);window.ozzx={script:{"home":{"data":{},"created":function created(){var _this=this;this.getData('/show1').then(function(data){var chart1=echarts.init(document.getElementById('chart1'));chart1.setOption({series:[{name:'概况',type:'pie',radius:'60%',data:data,label:{position:'inside',color:'#495A80',"formatter":'{b}: {d}%'},itemStyle:{emphasis:{shadowBlur:10,shadowOffsetX:0,shadowColor:'rgba(0, 0, 0, 0.5)'}}}],color:['#9966CC','#EAF048','#F6D6FF']});});this.getData('/distribution').then(function(data){var chart2=echarts.init(document.getElementById('chart2'));chart2.setOption({xAxis:{show:false},yAxis:{},grid:{left:30,top:50,bottom:20,right:30},tooltip:{formatter:function formatter(obj){var value=obj.value;return"".concat(value[2],": ").concat(value[1],"%");}},series:[{symbolSize:5,data:data,type:'scatter',markLine:{data:[{type:'average',name:'平均值'}]}}],color:['#82A6F5']});});this.getData('/transactionAve').then(function(data){var chart2=echarts.init(document.getElementById('chart3'));console.log(data[0]);chart2.setOption({xAxis:{type:'category',axisTick:{show:false},data:['买/卖1','买/卖2','买/卖3','买/卖4','买/卖5']},legend:{left:0,top:35,data:['平均买价','平均卖价','平均买数','平均卖数']},yAxis:[{type:'value',scale:true,name:'平均价格',max:20,min:12},{type:'value',scale:true,name:'平均手数',max:4000,min:0}],grid:{left:30,top:100,bottom:20,right:50},series:[{name:'平均买价',type:'bar',label:{normal:{show:true,position:'inside'}},data:data[0]},{name:'平均卖价',type:'bar',label:{normal:{show:true,position:'inside'}},data:data[2]},{name:'平均买数',type:'line',label:{normal:{show:true,position:'top'}},yAxisIndex:1,data:data[1]},{name:'平均卖数',type:'line',label:{normal:{show:true,position:'top'}},yAxisIndex:1,data:data[3]}],color:['#9966CC','#00FF80','#495A80','#f17c67']});_this.getChart4();});},"getChart4":function getChart4(){var _this2=this;this.getData('/VPB').then(function(data){var chart4=echarts.init(document.getElementById('chart4'));chart4.setOption({xAxis:{},yAxis:{},grid:{left:30,top:50,bottom:20,right:30},tooltip:{formatter:function formatter(obj){var value=obj.value;return"".concat(value[2],": ").concat(value[1]);}},series:[{symbolSize:function symbolSize(data){return Math.sqrt(data[3])/2;},data:data,type:'scatter'}],color:['#00FF80']});setTimeout(function(){_this2.getChart5();},0);});},"getChart5":function getChart5(){this.getData('/SB').then(function(data){var chart5=echarts.init(document.getElementById('chart5'));chart5.setOption({series:[{name:'内盘/外盘',type:'pie',radius:'60%',data:data,label:{position:'inside',"formatter":'{b}: {d}%'},itemStyle:{emphasis:{shadowBlur:10,shadowOffsetX:0,shadowColor:'rgba(0, 0, 0, 0.5)'}}}],color:['#f17c67','#495A80']});});},"getData":function getData(url){return new Promise(function(resolve,reject){var ajax=new XMLHttpRequest();//步骤二:设置请求的url参数,参数一是请求的类型,参数二是请求的url,可以带参数,动态的传递参数starName到服务端
-ajax.open('get',url);//步骤三:发送请求
-ajax.send();//步骤四:注册事件 onreadystatechange 状态改变就会调用
-ajax.onreadystatechange=function(){if(ajax.readyState==4&&ajax.status==200){resolve(JSON.parse(ajax.responseText).data);}};});}}},tool:{},entry:"home",state:{},global:{}};// 便捷的获取工具方法
+paramString=paramString.slice(0,-1);}window.location.href=paramString+"#"+pageName;}// 获取URL #后面内容
+function getarg(url){var arg=url.split("#");return arg[1];}// 页面资源加载完毕事件
+window.onload=function(){// 取出URL地址判断当前所在页面
+var pageArg=getarg(window.location.hash);// 从配置项中取出程序入口
+var page=pageArg?pageArg.split('?')[0]:ozzx.entry;if(page){var entryDom=document.getElementById('ox-'+page);if(entryDom){// 显示主页面
+entryDom.style.display='block';window.ozzx.activePage=page;// 更改$data链接
+$data=ozzx.script[page].data;runPageFunction(page,entryDom);}else{console.error('入口文件设置错误,错误值为: ',entryDom);}}else{console.error('未设置程序入口!');}};// url发生改变事件
+window.onhashchange=function(e){var oldUrlParam=getarg(e.oldURL);// 如果旧页面不存在则为默认页面
+if(!oldUrlParam)oldUrlParam=ozzx.entry;var newUrlParam=getarg(e.newURL);// 如果没有跳转到任何页面则跳转到主页
+if(newUrlParam===undefined){newUrlParam=ozzx.entry;}// 如果没有发生页面跳转则不需要进行操作
+// 切换页面特效
+switchPage(oldUrlParam,newUrlParam);};window.ozzx={script:{"one":{"data":{},"created":function created(){document.title='大盘涨跌-饼状图';getData('/show1').then(function(data){var chart=echarts.init(document.getElementById('chart'));chart.setOption({series:[{name:'概况',type:'pie',radius:'50%',data:data,label:{color:'#495A80',"formatter":'{b}: {d}%'},itemStyle:{emphasis:{shadowBlur:10,shadowOffsetX:0,shadowColor:'rgba(0, 0, 0, 0.5)'}}}],color:['#9966CC','#EAF048','#F6D6FF']});});}},"two":{"data":{},"created":function created(){document.title='大盘涨跌-饼状图';getData('/transactionAve').then(function(data){ozzx.global.chart=echarts.init(document.getElementById('two'));ozzx.global.chart.setOption({yAxis:{inverse:true,type:'category',axisTick:{show:false},axisLabel:{rotate:-90},data:['买/卖1','买/卖2','买/卖3','买/卖4','买/卖5']},xAxis:[{type:'value',scale:true,name:'平均价格',axisLabel:{rotate:-90},nameRotate:-90,max:20,min:12},{type:'value',scale:true,axisLabel:{rotate:90},nameRotate:-90,name:'平均手数',max:4000,min:0}],grid:{left:30,top:50,bottom:30,right:30},series:[{name:'平均买价',type:'bar',label:{normal:{show:true,rotate:-90,position:'inside'}},data:data[0]},{name:'平均卖价',type:'bar',label:{normal:{show:true,rotate:-90,position:'inside'}},data:data[2]},{name:'平均买数',type:'line',label:{normal:{show:true,rotate:-90,position:'top'}},xAxisIndex:1,data:data[1]},{name:'平均卖数',type:'line',label:{normal:{show:true,rotate:-90,position:'top'}},xAxisIndex:1,data:data[3]}],color:['#9966CC','#00FF80','#495A80','#f17c67']});});},"turn":function turn(){ozzx.global.chart.dispose();$go('two');}},"three":{"data":{},"created":function created(){document.title='买入/卖出意愿图';getData('/SB').then(function(data){var chart=echarts.init(document.getElementById('three'));chart.setOption({series:[{name:'内盘/外盘',type:'pie',radius:'60%',data:data,label:{position:'inside',"formatter":'{b}: {d}%'},itemStyle:{emphasis:{shadowBlur:10,shadowOffsetX:0,shadowColor:'rgba(0, 0, 0, 0.5)'}}}],color:['#f17c67','#495A80']});});}}},tool:{},entry:"one",state:{},global:{}};// 便捷的获取工具方法
 var $tool=ozzx.tool;var $data={};function switchPage(oldUrlParam,newUrlParam){var oldPage=oldUrlParam.split('&')[0];var newPage=newUrlParam.split('&')[0];// 查找页面跳转前的page页(dom节点)
 // console.log(oldUrlParam)
 // 如果源地址获取不到 那么一般是因为源页面为首页

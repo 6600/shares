@@ -1,0 +1,124 @@
+<template>
+  <div class="one-box">
+    <div class="chart" id="two"></div>
+  </div>
+</template>
+
+<script>
+  module.exports = {
+    data: {
+    },
+    created: function () {
+      document.title = '大盘涨跌-饼状图'
+      getData('/transactionAve').then((data) => {
+        ozzx.global.chart = echarts.init(document.getElementById('two'))
+        ozzx.global.chart.setOption({
+          yAxis: {
+            inverse: true,
+            type: 'category',
+            axisTick: {show: false},
+            axisLabel: {
+              rotate: -90,
+            },
+            data: ['买/卖1', '买/卖2', '买/卖3', '买/卖4', '买/卖5']
+          },
+          xAxis: [
+            {
+              type: 'value',
+              scale: true,
+              name: '平均价格',
+              axisLabel: {
+                rotate: -90,
+              },
+              nameRotate: -90,
+              max: 20,
+              min: 12
+            },
+            {
+              type: 'value',
+              scale: true,
+              axisLabel: {
+                rotate: 90,
+              },
+              nameRotate: -90,
+              name: '平均手数',
+              max: 4000,
+              min: 0
+            }
+          ],
+          grid: {
+            left: 30,
+            top: 50,
+            bottom: 30,
+            right: 30
+          },
+          series: [
+            {
+              name: '平均买价',
+              type: 'bar',
+              label: {
+                normal: {
+                  show: true,
+                  rotate: -90,
+                  position: 'inside'
+                }
+              },
+              data: data[0]
+            },
+            {
+              name: '平均卖价',
+              type: 'bar',
+              label: {
+                normal: {
+                  show: true,
+                  rotate: -90,
+                  position: 'inside'
+                }
+              },
+              data: data[2]
+            },
+            {
+              name: '平均买数',
+              type: 'line',
+              label: {
+                normal: {
+                  show: true,
+                  rotate: -90,
+                  position: 'top'
+                }
+              },
+              xAxisIndex: 1,
+              data: data[1]
+            },
+            {
+              name: '平均卖数',
+              type: 'line',
+              label: {
+                normal: {
+                  show: true,
+                  rotate: -90,
+                  position: 'top'
+                }
+              },
+              xAxisIndex: 1,
+              data: data[3]
+            }
+          ],
+          color: ['#9966CC', '#00FF80', '#495A80', '#f17c67']
+        })
+      })
+    },
+    turn: function () {
+      ozzx.global.chart.dispose()
+      $go('two')
+    }
+  }
+</script>
+
+
+<style lang="less">
+  .chart {
+    width: 100%;
+    height: 100%;
+  }
+</style>
