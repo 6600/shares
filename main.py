@@ -165,12 +165,19 @@ def VPB():
   for player in secondFloor:
     # 筛选出市净率低的
     PB = float(player[44])
-    if (PB < 0.95 and PB > 0 and float(player[51]) > 0):
+    # 取出市盈率
+    print(player[38])
+    syl = player[38]
+    if (syl == 'S'):
+      continue
+    # 判断市净率大于0 且 市盈率大于0
+    if (PB < 0.95 and PB > 0 and float(syl) > 0):
       # 内外盘
       buy = float(player[6])
       sell = float(player[7])
       if (sell > 0 and buy > 0):
-        VPBList.append([1 / float(player[51]), PB, player[0], buy / sell * 1000 ])
+        # 平均成本
+        VPBList.append([syl, PB, player[0], float(player[49]) - float(player[2])])
   return json.dumps({
     "err": 0,
     "data": VPBList
