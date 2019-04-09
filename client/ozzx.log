@@ -1,36 +1,33 @@
-22:48:13.608 DEBUG 获取到配置信息: 
-22:48:13.608 DEBUG {"outPut":{"minifyCss":true,"minifyJs":true,"outFileAddVersion":true},"root":"/src","entry":"home","title":"页面","outFolder":"../public","resourceFolder":"./src/resource","headList":[{"http-equiv":"content-type","content":"text/html; charset=UTF-8"},{"name":"viewport","content":"initial-scale=1,user-scalable=no,maximum-scale=1"}],"scriptList":[{"name":"echarts","src":"https://echarts.baidu.com/dist/echarts.common.min.js"}],"styleList":[],"pageList":[{"main":true,"isPage":true,"name":"home","src":"./src/page/home.page","temple":"<temple name=\"home\" src=\"./src/page/home.page\" isPage=\"true\"></temple>"}],"dev":{"watcher":{"enable":true,"ignored":"./dist/*","depth":99},"outPut":{"minifyCss":false,"minifyJs":false,"outFileAddVersion":false},"serverPort":8000,"server":true,"autoReload":true},"build":{"outPut":{"minifyCss":true,"minifyJs":true,"outFileAddVersion":true}}} 
-22:48:13.608 INFO  --------------------------- 开始编译 --------------------------- 
-22:48:13.608 INFO  程序运行目录: C:\Users\my\Documents\GitHub\shares\client 
-22:48:13.608 INFO  首次启动! 
-22:48:13.608 INFO  生成版本号: 61vr08ss72 
-22:48:13.611 INFO  清理资源文件夹: C:\Users\my\Documents\GitHub\shares\public\static 
-22:48:13.611 INFO  文件夹不存在: C:\Users\my\Documents\GitHub\shares\public\static 
-22:48:13.611 INFO  创建文件夹: C:\Users\my\Documents\GitHub\shares\public\static 
-22:48:13.611 INFO  读取模板文件: C:\Users\my\Documents\GitHub\pack\index.html 
-22:48:13.611 DEBUG 读取网页标题: 页面 
-22:48:13.611 DEBUG 处理页面源信息: [{"http-equiv":"content-type","content":"text/html; charset=UTF-8"},{"name":"viewport","content":"initial-scale=1,user-scalable=no,maximum-scale=1"}] 
-22:48:13.612 DEBUG 处理模板: ./src/page/home.page 
-22:48:13.751 DEBUG 缓存模板: ./src/page/home.page 
-22:48:13.752 INFO  文件夹不存在: C:\Users\my\Documents\GitHub\shares\public\static\resource 
-22:48:13.752 INFO  创建文件夹: C:\Users\my\Documents\GitHub\shares\public\static\resource 
-22:48:13.767 INFO  工程中只有一个页面! 
-22:48:13.767 INFO  文件夹不存在: C:\Users\my\Documents\GitHub\shares\public\static\css 
-22:48:13.768 INFO  创建文件夹: C:\Users\my\Documents\GitHub\shares\public\static\css 
-22:48:13.768 INFO  写文件: C:\Users\my\Documents\GitHub\shares\public\static\css\ozzx.animation.css 
-22:48:13.768 DEBUG 页面中不包含切换动画! 
-22:48:14.686 INFO  文件夹不存在: C:\Users\my\Documents\GitHub\shares\public\static\js 
-22:48:14.687 INFO  创建文件夹: C:\Users\my\Documents\GitHub\shares\public\static\js 
-22:48:14.688 DEBUG 处理引用脚本: [{"name":"echarts","src":"https://echarts.baidu.com/dist/echarts.common.min.js"}] 
-22:48:14.688 DEBUG 外部脚本数量: 1 
-22:48:14.688 DEBUG 处理脚本: echarts 
-22:48:14.688 DEBUG 网络脚本: echarts 
-22:48:14.688 DEBUG 完成外部脚本引用处理! 
-22:48:14.688 DEBUG 判断是否可以输出Html! 
-22:48:14.688 DEBUG 还有没有经过处理的资源! 
-22:48:14.890 DEBUG 需要经过特殊处理的css: [[".ox-home .show-box ",".ox-home "]] 
-22:48:14.891 DEBUG 判断是否可以输出Html! 
-22:48:14.891 DEBUG 准备输出html! 
-22:48:14.891 INFO  读取文件: C:\Users\my\Documents\GitHub\shares\client\src\resource\menu.svg 
-22:48:14.895 INFO  读取成功: C:\Users\my\Documents\GitHub\shares\client\src\resource\menu.svg 
-22:48:14.896 INFO  写入文件: C:\Users\my\Documents\GitHub\shares\public\static\resource\menu.svg 
+23:05:23.871 DEBUG 获取到配置信息: 
+23:05:23.871 DEBUG {"outPut":{"minifyCss":true,"minifyJs":true,"outFileAddVersion":true},"root":"/src","entry":"home","title":"页面","outFolder":"../public","resourceFolder":"./src/resource","headList":[{"http-equiv":"content-type","content":"text/html; charset=UTF-8"},{"name":"viewport","content":"initial-scale=1,user-scalable=no,maximum-scale=1"}],"scriptList":[{"name":"echarts","src":"https://echarts.baidu.com/dist/echarts.common.min.js"}],"styleList":[],"pageList":[{"main":true,"isPage":true,"name":"home","src":"./src/page/home.page","temple":"<temple name=\"home\" src=\"./src/page/home.page\" isPage=\"true\"></temple>"}],"dev":{"watcher":{"enable":true,"ignored":"./dist/*","depth":99},"outPut":{"minifyCss":false,"minifyJs":false,"outFileAddVersion":false},"serverPort":8000,"server":true,"autoReload":true},"build":{"outPut":{"minifyCss":true,"minifyJs":true,"outFileAddVersion":true}}} 
+23:05:23.871 INFO  --------------------------- 开始编译 --------------------------- 
+23:05:23.871 INFO  程序运行目录: C:\Users\my\Documents\GitHub\shares\client 
+23:05:23.871 INFO  首次启动! 
+23:05:23.871 INFO  生成版本号: d55mfais3d7 
+23:05:23.873 INFO  清理资源文件夹: C:\Users\my\Documents\GitHub\shares\public\static 
+23:05:23.873 INFO  文件夹不存在: C:\Users\my\Documents\GitHub\shares\public\static 
+23:05:23.874 INFO  创建文件夹: C:\Users\my\Documents\GitHub\shares\public\static 
+23:05:23.874 INFO  读取模板文件: C:\Users\my\Documents\GitHub\pack\index.html 
+23:05:23.874 DEBUG 读取网页标题: 页面 
+23:05:23.874 DEBUG 处理页面源信息: [{"http-equiv":"content-type","content":"text/html; charset=UTF-8"},{"name":"viewport","content":"initial-scale=1,user-scalable=no,maximum-scale=1"}] 
+23:05:23.875 DEBUG 处理模板: ./src/page/home.page 
+23:05:24.016 DEBUG 缓存模板: ./src/page/home.page 
+23:05:24.018 INFO  文件夹不存在: C:\Users\my\Documents\GitHub\shares\public\static\resource 
+23:05:24.018 INFO  创建文件夹: C:\Users\my\Documents\GitHub\shares\public\static\resource 
+23:05:24.033 INFO  工程中只有一个页面! 
+23:05:24.034 INFO  文件夹不存在: C:\Users\my\Documents\GitHub\shares\public\static\css 
+23:05:24.034 INFO  创建文件夹: C:\Users\my\Documents\GitHub\shares\public\static\css 
+23:05:24.034 INFO  写文件: C:\Users\my\Documents\GitHub\shares\public\static\css\ozzx.animation.css 
+23:05:24.034 DEBUG 页面中不包含切换动画! 
+23:05:24.954 INFO  文件夹不存在: C:\Users\my\Documents\GitHub\shares\public\static\js 
+23:05:24.955 INFO  创建文件夹: C:\Users\my\Documents\GitHub\shares\public\static\js 
+23:05:24.956 DEBUG 处理引用脚本: [{"name":"echarts","src":"https://echarts.baidu.com/dist/echarts.common.min.js"}] 
+23:05:24.956 DEBUG 外部脚本数量: 1 
+23:05:24.956 DEBUG 处理脚本: echarts 
+23:05:24.956 DEBUG 网络脚本: echarts 
+23:05:24.956 DEBUG 完成外部脚本引用处理! 
+23:05:24.956 DEBUG 判断是否可以输出Html! 
+23:05:24.956 DEBUG 还有没有经过处理的资源! 
+23:05:25.159 DEBUG 需要经过特殊处理的css: [[".ox-home .show-box ",".ox-home "]] 
+23:05:25.159 DEBUG 判断是否可以输出Html! 
+23:05:25.159 DEBUG 准备输出html! 

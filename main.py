@@ -17,6 +17,14 @@ CORS(app, supports_credentials=True)
 tempData = ''
 tempTime = 0
 
+# 读取上证指数列表
+szListFile = open('sz.json', 'r', encoding='utf-8').read()
+szList = json.loads(szListFile)
+
+# 读取板块信息
+plateFile = open('plate.json', 'r', encoding='utf-8').read()
+plateList = json.loads(plateFile)
+
 def getData2 (summary, tempList):
   listString = ','.join(tempList)
   data = requests.get(url='http://qt.gtimg.cn/q=' + listString).text
@@ -25,6 +33,7 @@ def getData2 (summary, tempList):
   # 去掉空数据
   for sz in sharesList:
     sz = sz.replace("~~", "~")
+    sz = sz.replace("~~~", "~")
     summary += sz.replace("~",",") + '\n'
   return summary
 
@@ -32,14 +41,13 @@ def getData2 (summary, tempList):
 def getData ():
   global tempData
   global tempTime
+  global szList
   if (int(time.time()) - tempTime < 30):
     return tempData
   # 今天日期
   date = time.strftime('%Y.%m.%d',time.localtime(time.time()))
 
-  # 读取上证指数列表
-  szListFile = open('sz.json', 'r', encoding='utf-8').read()
-  szList = json.loads(szListFile)
+  
   print("等待获取条数:" + str(len(szList)))
   summary = '股票名字,代码,当前价格,昨日收盘价,今日开盘价,成交的股票数,外盘,内盘,买一报价,买一数量,买二报价,买二数量,买三报价,买三数量,买四报价,买四数量,买五报价,买五数量,卖一报价,卖一数量,卖二报价,卖二数量,卖三报价,卖三数量,卖四报价,卖四数量,卖五报价,卖五数量,最近逐笔成交,时间,涨跌,涨跌%,今日最高价,今日最低价,价格/成交量(手)/成交额,成交量(手),成交金额,换手率(%),市盈率,最高,最低,振幅(%),流通市值(亿),总市值(亿),市净率,涨停价,跌停价,量比,委差,平均成本,PE(动)\n'
   
@@ -98,14 +106,18 @@ def show1():
 # 获取分布情况
 @app.route("/distribution")
 def distribution():
-  distributionList = []
+  global plateList
   ind = 0
+  sendData = {}
   for player in getData():
-    distributionList.append([ind, player[31], player[0]])
+    plate = plateList['sh'+ player[1]]
+    if (plate not in sendData):
+      sendData[plate] = []
+    sendData[plate].append([ind, player[31], player[0]])
     ind += 1
   return json.dumps({
     "err": 0,
-    "data": distributionList
+    "data": sendData
   })
 
 # 获取分布情况
@@ -166,7 +178,7 @@ def VPB():
     # 筛选出市净率低的
     PB = float(player[44])
     # 取出市盈率
-    print(player[38])
+    # print(player[38])
     syl = player[38]
     if (syl == 'S'):
       continue

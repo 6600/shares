@@ -1,9 +1,5 @@
 <template>
   <div class="show-box">
-    <div class="show show-1" id="show1">
-      <div class="title">大盘涨跌-饼状图</div>
-      <div class="chart chart-1" id="chart1"></div>
-    </div>
     <div class="show show-2" id="show2">
       <div class="title">大盘涨跌-散点图</div>
       <div class="chart chart-2" id="chart2"></div>
@@ -16,11 +12,14 @@
       <div class="title">大盘涨跌-散点图</div>
       <div class="chart chart-4" id="chart4"></div>
     </div>
+    <div class="show show-1" id="show1">
+      <div class="title">大盘涨跌-饼状图</div>
+      <div class="chart chart-1" id="chart1"></div>
+    </div>
     <div class="show show-5" id="show5">
       <div class="title">买入/卖出意愿-饼状图</div>
       <div class="chart chart-5" id="chart5"></div>
     </div>
-    <img class="menu-icon" src="@&menu.svg&" @click="$dom('rightBar').classList.add('right-bar-active')"/>
     <div class="right-bar" @name="rightBar"></div>
   </div>
 </template>
@@ -58,14 +57,18 @@
       })
       this.getData('/distribution').then((data) => {
         const chart2 = echarts.init(document.getElementById('chart2'))
-        chart2.setOption({
+        let chartConfig = {
           xAxis: {
             show: false
           },
           yAxis: {},
+          legend: {
+            top: 30,
+            left: 5
+          },
           grid: {
             left: 30,
-            top: 50,
+            top: 120,
             bottom: 20,
             right: 30
           },
@@ -75,22 +78,27 @@
               return `${value[2]}: ${value[1]}%`
             }
           },
-          series: [{
+          series: []
+        }
+        
+        for (let key in data) {
+          chartConfig.series.push({
             symbolSize: 5,
-            data: data,
+            name: key,
+            data: data[key],
             type: 'scatter',
-            markLine: {
-              data : [
-                {type : 'average', name: '平均值'}
-              ]
-            }
-          }],
-          color: ['#82A6F5']
-        })
+            // markLine: {
+            //   data : [
+            //     {type : 'average', name: '平均值'}
+            //   ]
+            // }
+          })
+        }
+        chart2.setOption(chartConfig)
       })
       this.getData('/transactionAve').then((data) => {
         const chart2 = echarts.init(document.getElementById('chart3'))
-        console.log(data[0])
+        // console.log(data[0])
         chart2.setOption({
           xAxis: {
             type: 'category',
@@ -207,7 +215,7 @@
           },
           series: [{
             symbolSize: function(data) {
-              return Math.sqrt(data[3]) * 20 + 10;
+              return (-data[3] * 100 + 10).toFixed(2);
             },
             data: data,
             type: 'scatter',
@@ -290,8 +298,8 @@
     height: 300px;
   }
   .show-2 {
-    width: calc(100% - 300px);
-    height: 300px;
+    width: 100%;
+    height: 400px;
   }
   .show-3 {
     width: 600px;
@@ -300,14 +308,6 @@
   .show-4 {
     width: calc(100% - 600px);
     height: 300px;
-  }
-  .menu-icon {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    width: 45px;
-    height: 45px;
-    cursor: pointer;
   }
   .right-bar {
     right: -200px;
