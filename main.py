@@ -32,8 +32,6 @@ def getData2 (summary, tempList):
 
   # 去掉空数据
   for sz in sharesList:
-    sz = sz.replace("~~", "~")
-    sz = sz.replace("~~~", "~")
     summary += sz.replace("~",",") + '\n'
   return summary
 
@@ -176,9 +174,8 @@ def VPB():
   secondFloor = getData()
   for player in secondFloor:
     # 筛选出市净率低的
-    PB = float(player[44])
+    PB = float(player[45])
     # 取出市盈率
-    # print(player[38])
     syl = player[38]
     if (syl == 'S'):
       continue
@@ -189,7 +186,9 @@ def VPB():
       sell = float(player[7])
       if (sell > 0 and buy > 0):
         # 平均成本
-        VPBList.append([syl, PB, player[0], float(player[49]) - float(player[2])])
+        print(player)
+        print(player[38], player[45], player[50])
+        VPBList.append([syl, PB, player[0], float(player[50]) - float(player[2])])
   return json.dumps({
     "err": 0,
     "data": VPBList
@@ -215,6 +214,48 @@ def SB():
       {"value": int(sellTotal / number), "name":'卖出'},
       {"value": int(buyTotal / number), "name":'买入'}
     ]
+  })
+
+# 获取五秒交易量
+@app.route("/wmjyl")
+def wmjyl():
+  
+  data = getData()
+
+  # 发送的数据
+  sendData = [0, 0, 0, 0]
+  # 计数器
+  num = 0
+  # 取出每一组数据
+  for player in data:
+    
+    transaction = player[28]
+    transactionArr = transaction.split('|')
+    # 遍历每一笔交易
+    for hand in transactionArr:
+      handArr = hand.split('/')
+      # 排除不合法数据
+      if (len(handArr) < 5):
+        continue
+      # 计数
+      num += 1
+      # 判断是买还是卖
+      if (handArr[3] == 'B'):
+        # 买单数量
+        sendData[0] += 1
+        # 买
+        sendData[1] += int(handArr[2])
+      else:
+        # 卖
+        # 卖单数量
+        sendData[2] += 1
+        sendData[3] += int(handArr[2])
+      # print(transaction)
+  sendData[1] = int(sendData[1] / num)
+  sendData[3] = int(sendData[3] / num)
+  return json.dumps({
+    "err": 0,
+    "data": sendData
   })
 
 if __name__ == '__main__':

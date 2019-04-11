@@ -56,7 +56,6 @@ def run():
       # 去掉空数据
       for sz in sharesList:
         global summary
-        sz = sz.replace("~~", "~")
         global timeData
         if (timeData == ''):
           timeData = sz.split('~')[29]
