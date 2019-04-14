@@ -30,9 +30,14 @@ def mkdir(path):
     return False
 
 
+# 控制程序是否持续运行
 keepRun = False
+# 数据存储字段
 summary = ''
+# 数据生成时间
 timeData = ''
+
+# 存储数据
 def run():
   # 今天日期
   date = time.strftime('%Y.%m.%d',time.localtime(time.time()))
@@ -45,7 +50,7 @@ def run():
     global summary
     global timeData
     summary = '股票名字,代码,当前价格,昨日收盘价,今日开盘价,成交的股票数,外盘,内盘,买一报价,买一数量,买二报价,买二数量,买三报价,买三数量,买四报价,买四数量,买五报价,买五数量,卖一报价,卖一数量,卖二报价,卖二数量,卖三报价,卖三数量,卖四报价,卖四数量,卖五报价,卖五数量,最近逐笔成交,时间,涨跌,涨跌%,今日最高价,今日最低价,价格/成交量(手)/成交额,成交量(手),成交金额,换手率(%),市盈率,最高,最低,振幅(%),流通市值(亿),总市值(亿),市净率,涨停价,跌停价,量比,委差,平均成本,PE(动)\n'
-    # 每50个提交一次
+    # 每200个提交一次
     tempList = []
     timeData = ''
     def getData ():
@@ -63,7 +68,7 @@ def run():
         summary += sz.replace("~",",") + '\n'
 
     for sz in szList:
-      if len(tempList) >= 50:
+      if len(tempList) >= 200:
         getData()
         tempList = []
       tempList.append(sz['id'])
@@ -72,10 +77,11 @@ def run():
     file_path = './history/' + date + '/' + timeData + '.csv'
     with open(file_path, mode='w', encoding='utf_8_sig') as file_obj:
       file_obj.write(summary)
+    
     # 每5秒执行一次
-    schedule.run_pending()
     time.sleep(5)
 
+# 开始运行程序
 def start():
   global keepRun
   if (not keepRun):
@@ -83,6 +89,7 @@ def start():
     keepRun = True
     run()
 
+# 停止程序
 def stop():
   global keepRun
   if (keepRun):
@@ -90,6 +97,7 @@ def stop():
     keepRun = False
 
 
+# 指定时间运行
 schedule.every().day.at("09:25").do(start)
 schedule.every().day.at("11:35").do(stop)
 schedule.every().day.at("13:25").do(start)

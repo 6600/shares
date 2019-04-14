@@ -241,7 +241,7 @@
         chart5.setOption({
           series : [
             {
-              name: '内盘/外盘',
+              name: '买入/卖出意愿',
               type: 'pie',
               radius : '60%',
               data: data,
@@ -314,13 +314,13 @@
               name: '五笔买卖占比',
               type: 'pie',
               radius : '60%',
-              data: [{
-                name: "买",
-                value: data[0]
-              },
+              data: [
               {
                 name: "卖",
                 value: data[2]
+              }, {
+                name: "买",
+                value: data[0]
               }],
               label: {
                 position: 'inside',

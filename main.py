@@ -49,18 +49,20 @@ def getData ():
   print("等待获取条数:" + str(len(szList)))
   summary = '股票名字,代码,当前价格,昨日收盘价,今日开盘价,成交的股票数,外盘,内盘,买一报价,买一数量,买二报价,买二数量,买三报价,买三数量,买四报价,买四数量,买五报价,买五数量,卖一报价,卖一数量,卖二报价,卖二数量,卖三报价,卖三数量,卖四报价,卖四数量,卖五报价,卖五数量,最近逐笔成交,时间,涨跌,涨跌%,今日最高价,今日最低价,价格/成交量(手)/成交额,成交量(手),成交金额,换手率(%),市盈率,最高,最低,振幅(%),流通市值(亿),总市值(亿),市净率,涨停价,跌停价,量比,委差,平均成本,PE(动)\n'
   
-  # 每50个提交一次
+  # 每100个提交一次
   tempList = []
 
 
   for sz in szList:
-    if len(tempList) >= 50:
+    if len(tempList) >= 200:
       summary = getData2(summary, tempList)
       tempList = []
     tempList.append(sz['id'])
 
+  # 处理剩余的部分
   summary = getData2(summary, tempList)
-
+  print('数据获取成功!')
+  # print('获取数据条数:' + str(len(summary)))
   # 清洗数据
   secondFloor = []
 
@@ -186,8 +188,8 @@ def VPB():
       sell = float(player[7])
       if (sell > 0 and buy > 0):
         # 平均成本
-        print(player)
-        print(player[38], player[45], player[50])
+        # print(player)
+        # print(player[38], player[45], player[50])
         VPBList.append([syl, PB, player[0], float(player[50]) - float(player[2])])
   return json.dumps({
     "err": 0,

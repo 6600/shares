@@ -1,0 +1,34 @@
+17:02:19.389 DEBUG 获取到配置信息: 
+17:02:19.390 DEBUG {"outPut":{"minifyCss":true,"minifyJs":true,"outFileAddVersion":true},"root":"/src","entry":"home","title":"页面","outFolder":"../public","resourceFolder":"./src/resource","headList":[{"http-equiv":"content-type","content":"text/html; charset=UTF-8"},{"name":"viewport","content":"initial-scale=1,user-scalable=no,maximum-scale=1"}],"scriptList":[{"name":"echarts","src":"https://echarts.baidu.com/dist/echarts.common.min.js"}],"styleList":[],"pageList":[{"main":true,"isPage":true,"name":"home","src":"./src/page/home.page","temple":"<temple name=\"home\" src=\"./src/page/home.page\" isPage=\"true\"></temple>"}],"dev":{"watcher":{"enable":true,"ignored":"./dist/*","depth":99},"outPut":{"minifyCss":false,"minifyJs":false,"outFileAddVersion":false},"serverPort":8000,"server":true,"autoReload":true},"build":{"outPut":{"minifyCss":true,"minifyJs":true,"outFileAddVersion":true}}} 
+17:02:19.390 INFO  --------------------------- 开始编译 --------------------------- 
+17:02:19.390 INFO  程序运行目录: C:\Users\my\Documents\GitHub\shares\client 
+17:02:19.390 INFO  首次启动! 
+17:02:19.390 INFO  生成版本号: eimroac6n1 
+17:02:19.391 INFO  清理资源文件夹: C:\Users\my\Documents\GitHub\shares\public\static 
+17:02:19.391 INFO  文件夹不存在: C:\Users\my\Documents\GitHub\shares\public\static 
+17:02:19.391 INFO  创建文件夹: C:\Users\my\Documents\GitHub\shares\public\static 
+17:02:19.391 INFO  读取模板文件: C:\Users\my\Documents\GitHub\pack\index.html 
+17:02:19.392 DEBUG 读取网页标题: 页面 
+17:02:19.392 DEBUG 处理页面源信息: [{"http-equiv":"content-type","content":"text/html; charset=UTF-8"},{"name":"viewport","content":"initial-scale=1,user-scalable=no,maximum-scale=1"}] 
+17:02:19.392 DEBUG 处理模板: ./src/page/home.page 
+17:02:19.536 DEBUG 缓存模板: ./src/page/home.page 
+17:02:19.537 INFO  文件夹不存在: C:\Users\my\Documents\GitHub\shares\public\static\resource 
+17:02:19.537 INFO  创建文件夹: C:\Users\my\Documents\GitHub\shares\public\static\resource 
+17:02:19.553 INFO  工程中只有一个页面! 
+17:02:19.553 DEBUG 页面中不包含切换动画! 
+17:02:20.476 INFO  文件夹不存在: C:\Users\my\Documents\GitHub\shares\public\static\js 
+17:02:20.476 INFO  创建文件夹: C:\Users\my\Documents\GitHub\shares\public\static\js 
+17:02:20.576 DEBUG 处理引用脚本: [{"name":"echarts","src":"https://echarts.baidu.com/dist/echarts.common.min.js"}] 
+17:02:20.576 DEBUG 外部脚本数量: 1 
+17:02:20.576 DEBUG 处理脚本: echarts 
+17:02:20.576 DEBUG 网络脚本: echarts 
+17:02:20.576 DEBUG 完成外部脚本引用处理! 
+17:02:20.576 DEBUG 判断是否可以输出Html! 
+17:02:20.576 DEBUG 还有没有经过处理的资源! 
+17:02:20.584 DEBUG 文件处理成功: 
+17:02:20.584 DEBUG 文件处理成功: 
+17:02:20.779 DEBUG 需要经过特殊处理的css: [[".o-home .show-box ",".o-home "]] 
+17:02:20.780 DEBUG 判断是否可以输出Html! 
+17:02:20.780 DEBUG 准备输出html! 
+17:02:20.780 DEBUG 开始美化html 
+17:02:20.827 DEBUG 文件处理成功: 

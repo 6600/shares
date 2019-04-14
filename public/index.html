@@ -1,97 +1,101 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <title>页面</title>
-    <!-- 页面的元信息 -->
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1"/>
-    <!-- 页面主样式文件 -->
-    <style>
-      body, html, .ox {
-        padding: 0;
-        margin: 0;
-        width: 100%;
-        height: 100%;
-      }
-      
-      /* 清除浮动 */
-      .clear {
-        clear: both;
-      }
-      
-      .ozzx-animation {
-        overflow: hidden;
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-        -webkit-transform-style: preserve-3d;
-        transform-style: preserve-3d;
-      }
-      
-      .ox-home .show {
-        position: relative;
-        border: 1px solid #ccc;
-        float: left;
-        box-sizing: border-box;
-      }
-      
-      .ox-home .show .title {
-        position: absolute;
-        background-color: skyblue;
-        color: white;
-        width: calc(100% - 20px);
-        height: 26px;
-        line-height: 25px;
-        padding: 0 10px;
-      }
-      
-      .ox-home .chart {
-        width: 100%;
-        height: 100%;
-      }
-      
-      .ox-home .show-1,
-      .ox-home .show-5,
-      .ox-home .show-6,
-      .ox-home .show-7 {
-        width: 300px;
-        height: 300px;
-      }
-      
-      .ox-home .show-2 {
-        width: 100%;
-        height: 400px;
-      }
-      
-      .ox-home .show-3 {
-        width: 600px;
-        height: 300px;
-      }
-      
-      .ox-home .show-4 {
-        width: calc(100% - 600px);
-        height: 300px;
-      }
-      
-      .ox-home .right-bar {
-        right: -200px;
-        height: 100%;
-        width: 199px;
-        position: fixed;
-        background-color: white;
-        border-left: 1px solid #ccc;
-      }
-      
-      .ox-home .right-bar-active {
-        right: 0px;
-      }
-    </style>
-    <link rel="stylesheet" href="./static/css/ozzx.animation.css">
-  </head>
-  <body>
-    <!-- 页面区域 -->
-    <div class="show-box ox-home ox" id="ox-home">
+
+<head>
+  <title>页面</title>
+  <!-- 页面的元信息 -->
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1" />
+  <!-- 页面主样式文件 -->
+  <style>
+    body,
+    html,
+    .ox {
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* 清除浮动 */
+    .clear {
+      clear: both;
+    }
+
+    .owo-animation {
+      overflow: hidden;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+    }
+
+    .o-home .show {
+      position: relative;
+      border: 1px solid #ccc;
+      float: left;
+      box-sizing: border-box;
+    }
+
+    .o-home .show .title {
+      position: absolute;
+      background-color: skyblue;
+      color: white;
+      width: calc(100% - 20px);
+      height: 26px;
+      line-height: 25px;
+      padding: 0 10px;
+    }
+
+    .o-home .chart {
+      width: 100%;
+      height: 100%;
+    }
+
+    .o-home .show-1,
+    .o-home .show-5,
+    .o-home .show-6,
+    .o-home .show-7 {
+      width: 300px;
+      height: 300px;
+    }
+
+    .o-home .show-2 {
+      width: 100%;
+      height: 400px;
+    }
+
+    .o-home .show-3 {
+      width: 600px;
+      height: 300px;
+    }
+
+    .o-home .show-4 {
+      width: calc(100% - 600px);
+      height: 300px;
+    }
+
+    .o-home .right-bar {
+      right: -200px;
+      height: 100%;
+      width: 199px;
+      position: fixed;
+      background-color: white;
+      border-left: 1px solid #ccc;
+    }
+
+    .o-home .right-bar-active {
+      right: 0px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <!-- 页面区域 -->
+  <div class="show-box o-home ox" id="o-home">
     <div class="show show-2" id="show2">
       <div class="title">大盘涨跌-散点图</div>
       <div class="chart chart-2" id="chart2"></div>
@@ -122,9 +126,321 @@
     </div>
     <div class="right-bar" @name="rightBar"></div>
   </div>
-    <!-- 页面脚本 -->
-    <script src="https://echarts.baidu.com/dist/echarts.common.min.js" type="text/javascript" ></script>
-    <!-- 主要script文件 -->
-    <script src="./static/js/ozzx.main.js" type="text/javascript"></script>
-  </body>
+  <!-- owo框架代码 -->
+  <script>
+    "use strict";
+
+    window.owo = {
+      // 页面数据和方法
+      script: {
+        "home": {
+          "data": {},
+          "created": function created() {
+            var _this = this;
+
+            this.getData('/show1').then(function(data) {
+              var chart1 = echarts.init(document.getElementById('chart1'));
+              chart1.setOption({
+                series: [{
+                  name: '概况',
+                  type: 'pie',
+                  radius: '60%',
+                  data: data,
+                  label: {
+                    position: 'inside',
+                    color: '#495A80',
+                    "formatter": '{b}: {d}%'
+                  },
+                  itemStyle: {
+                    emphasis: {
+                      shadowBlur: 10,
+                      shadowOffsetX: 0,
+                      shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                  }
+                }],
+                color: ['#9966CC', '#EAF048', '#F6D6FF']
+              });
+            });
+            this.getData('/distribution').then(function(data) {
+              var chart2 = echarts.init(document.getElementById('chart2'));
+              var chartConfig = {
+                xAxis: {
+                  show: false
+                },
+                yAxis: {},
+                legend: {
+                  top: 30,
+                  left: 5
+                },
+                grid: {
+                  left: 30,
+                  top: 120,
+                  bottom: 20,
+                  right: 30
+                },
+                tooltip: {
+                  formatter: function formatter(obj) {
+                    var value = obj.value;
+                    return "".concat(value[2], ": ").concat(value[1], "%");
+                  }
+                },
+                series: []
+              };
+
+              for (var key in data) {
+                chartConfig.series.push({
+                  symbolSize: 5,
+                  name: key,
+                  data: data[key],
+                  type: 'scatter' // markLine: {
+                  //   data : [
+                  //     {type : 'average', name: '平均值'}
+                  //   ]
+                  // }
+
+                });
+              }
+
+              chart2.setOption(chartConfig);
+            });
+            this.getData('/transactionAve').then(function(data) {
+              var chart2 = echarts.init(document.getElementById('chart3')); // console.log(data[0])
+
+              chart2.setOption({
+                xAxis: {
+                  type: 'category',
+                  axisTick: {
+                    show: false
+                  },
+                  data: ['买/卖1', '买/卖2', '买/卖3', '买/卖4', '买/卖5']
+                },
+                legend: {
+                  left: 0,
+                  top: 35,
+                  data: ['平均买价', '平均卖价', '平均买数', '平均卖数']
+                },
+                yAxis: [{
+                  type: 'value',
+                  scale: true,
+                  name: '平均价格',
+                  max: 20,
+                  min: 12
+                }, {
+                  type: 'value',
+                  scale: true,
+                  name: '平均手数',
+                  max: 4000,
+                  min: 0
+                }],
+                grid: {
+                  left: 30,
+                  top: 100,
+                  bottom: 20,
+                  right: 50
+                },
+                series: [{
+                  name: '平均买价',
+                  type: 'bar',
+                  label: {
+                    normal: {
+                      show: true,
+                      position: 'inside'
+                    }
+                  },
+                  data: data[0]
+                }, {
+                  name: '平均卖价',
+                  type: 'bar',
+                  label: {
+                    normal: {
+                      show: true,
+                      position: 'inside'
+                    }
+                  },
+                  data: data[2]
+                }, {
+                  name: '平均买数',
+                  type: 'line',
+                  label: {
+                    normal: {
+                      show: true,
+                      position: 'top'
+                    }
+                  },
+                  yAxisIndex: 1,
+                  data: data[1]
+                }, {
+                  name: '平均卖数',
+                  type: 'line',
+                  label: {
+                    normal: {
+                      show: true,
+                      position: 'top'
+                    }
+                  },
+                  yAxisIndex: 1,
+                  data: data[3]
+                }],
+                color: ['#9966CC', '#00FF80', '#495A80', '#f17c67']
+              });
+
+              _this.getChart4();
+            });
+          },
+          "getChart4": function getChart4() {
+            var _this2 = this;
+
+            this.getData('/VPB').then(function(data) {
+              var chart4 = echarts.init(document.getElementById('chart4'));
+              chart4.setOption({
+                xAxis: {
+                  type: 'value',
+                  name: '市盈率',
+                  max: 100,
+                  min: 0
+                },
+                yAxis: {
+                  type: 'value',
+                  name: '市净率',
+                  max: 1,
+                  min: 0.6
+                },
+                grid: {
+                  left: 30,
+                  top: 60,
+                  bottom: 20,
+                  right: 60
+                },
+                tooltip: {
+                  formatter: function formatter(obj) {
+                    var value = obj.value;
+                    return "".concat(value[2], ":<br/>\u5E02\u51C0\u7387: ").concat(value[1], "<br/>\u5E02\u76C8\u7387: ").concat(value[0], "<br/>\u5E73\u5747\u6210\u672C: ").concat(value[3].toFixed(4));
+                  }
+                },
+                series: [{
+                  symbolSize: function symbolSize(data) {
+                    return (-data[3] * 100 + 10).toFixed(2);
+                  },
+                  data: data,
+                  type: 'scatter'
+                }],
+                color: ['#00FF80']
+              });
+              setTimeout(function() {
+                _this2.getChart5();
+              }, 0);
+            });
+          },
+          "getChart5": function getChart5() {
+            var _this3 = this;
+
+            this.getData('/SB').then(function(data) {
+              var chart5 = echarts.init(document.getElementById('chart5'));
+              chart5.setOption({
+                series: [{
+                  name: '买入/卖出意愿',
+                  type: 'pie',
+                  radius: '60%',
+                  data: data,
+                  label: {
+                    position: 'inside',
+                    "formatter": '{b}: {d}%'
+                  },
+                  itemStyle: {
+                    emphasis: {
+                      shadowBlur: 10,
+                      shadowOffsetX: 0,
+                      shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                  }
+                }],
+                color: ['#f17c67', '#495A80']
+              });
+              setTimeout(function() {
+                _this3.wmjyl();
+              }, 0);
+            });
+          },
+          "getData": function getData(url) {
+            return new Promise(function(resolve, reject) {
+              var ajax = new XMLHttpRequest(); //步骤二:设置请求的url参数,参数一是请求的类型,参数二是请求的url,可以带参数,动态的传递参数starName到服务端
+
+              ajax.open('get', url); //步骤三:发送请求
+
+              ajax.send(); //步骤四:注册事件 onreadystatechange 状态改变就会调用
+
+              ajax.onreadystatechange = function() {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                  resolve(JSON.parse(ajax.responseText).data);
+                }
+              };
+            });
+          },
+          "wmjyl": function wmjyl() {
+            this.getData('/wmjyl').then(function(data) {
+              // console.log(data)
+              var chart6 = echarts.init(document.getElementById('chart6'));
+              chart6.setOption({
+                xAxis: {
+                  type: 'category',
+                  data: ['买', '卖']
+                },
+                grid: {
+                  left: 50,
+                  top: 40,
+                  bottom: 20,
+                  right: 20
+                },
+                yAxis: {
+                  type: 'value'
+                },
+                series: [{
+                  barWidth: 15,
+                  data: [data[1], data[3]],
+                  type: 'bar'
+                }],
+                color: ['#009fe9']
+              }); // 占比饼状图
+
+              var chart7 = echarts.init(document.getElementById('chart7'));
+              chart7.setOption({
+                series: [{
+                  name: '五笔买卖占比',
+                  type: 'pie',
+                  radius: '60%',
+                  data: [{
+                    name: "卖",
+                    value: data[2]
+                  }, {
+                    name: "买",
+                    value: data[0]
+                  }],
+                  label: {
+                    position: 'inside',
+                    "formatter": '{b}: {d}%'
+                  },
+                  itemStyle: {
+                    emphasis: {
+                      shadowBlur: 10,
+                      shadowOffsetX: 0,
+                      shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                  }
+                }],
+                color: ['#f17c67', '#495A80']
+              });
+            });
+          }
+        }
+      },
+      // 页面默认入口
+      entry: "home"
+    };
+  </script>
+  <script src="https://echarts.baidu.com/dist/echarts.common.min.js" type="text/javascript"></script>
+  <!-- 主要script文件 -->
+  <script src="./static/js/owo.main.js" type="text/javascript"></script>
+</body>
+
 </html>
