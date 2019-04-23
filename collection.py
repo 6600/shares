@@ -7,6 +7,8 @@ import json
 import requests
 import time
 import schedule
+import zipfile
+import shutil
 
 
 # 如果不存在目录则创建目录
@@ -37,14 +39,13 @@ summary = ''
 # 数据生成时间
 timeData = ''
 
+szListFile = open('sz.json', 'r', encoding='utf-8').read()
+szList = json.loads(szListFile)
+
 # 存储数据
 def run():
-  # 今天日期
-  date = time.strftime('%Y.%m.%d',time.localtime(time.time()))
-  mkdir('./history/' + date)
-  szListFile = open('sz.json', 'r', encoding='utf-8').read()
-  szList = json.loads(szListFile)
   
+  global szList
   global keepRun
   while keepRun:
     global summary
@@ -74,7 +75,7 @@ def run():
       tempList.append(sz['id'])
     # 处理尾巴
     getData()
-    file_path = './history/' + date + '/' + timeData + '.csv'
+    file_path = './history/temp/' + timeData + '.csv'
     with open(file_path, mode='w', encoding='utf_8_sig') as file_obj:
       file_obj.write(summary)
     
@@ -84,6 +85,8 @@ def run():
 # 开始运行程序
 def start():
   global keepRun
+  # 创建文件夹
+  mkdir('./history/temp')
   if (not keepRun):
     print('开始运行')
     keepRun = True
@@ -96,12 +99,29 @@ def stop():
     print('停止运行')
     keepRun = False
 
+def pack():
+  startdir = "./history/temp"  #要压缩的文件夹路径
+  # file_news ='./history/' + time.strftime('%Y.%m.%d',time.localtime(time.time())) +'.zip' # 压缩后文件夹的名字
+  # z = zipfile.ZipFile(file_news,'w',zipfile.ZIP_DEFLATED) #参数一：文件夹名
+  # for dirpath, dirnames, filenames in os.walk(startdir):
+  #     fpath = dirpath.replace(startdir,'') #这一句很重要，不replace的话，就从根目录开始复制
+  #     fpath = fpath and fpath + os.sep or ''#这句话理解我也点郁闷，实现当前文件夹以及包含的所有文件的压缩
+  #     for filename in filenames:
+  #         z.write(os.path.join(dirpath, filename),fpath+filename)
+  # z.close()
+  # time.sleep(5)
+  shutil.rmtree(startdir)
 
 # 指定时间运行
 schedule.every().day.at("09:25").do(start)
 schedule.every().day.at("11:35").do(stop)
 schedule.every().day.at("13:25").do(start)
 schedule.every().day.at("15:35").do(stop)
+# 每天4点压缩数据
+schedule.every().day.at("16:00").do(pack)
+
+start()
+# pack()
 
 # 不断运行
 while True:
