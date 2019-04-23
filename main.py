@@ -15,12 +15,6 @@ app = Flask(__name__, static_folder='public', static_url_path='/public')
 
 CORS(app, supports_credentials=True)
 
-
-
-
-
-
-
 @app.route("/show1")
 def show1():
   data = handle.Handle.essential()

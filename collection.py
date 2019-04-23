@@ -9,7 +9,9 @@ import time
 import schedule
 import zipfile
 import shutil
+from handle import Handle
 
+from sdk import Weixin
 
 # 如果不存在目录则创建目录
 def mkdir(path):
@@ -41,6 +43,10 @@ timeData = ''
 
 szListFile = open('sz.json', 'r', encoding='utf-8').read()
 szList = json.loads(szListFile)
+
+config = json.load(open("config.json", encoding='utf-8'))
+weixin = Weixin(corpid=config['weixin']['corpid'], corpsecret=config['weixin']['corpsecret'])
+
 
 # 存储数据
 def run():
@@ -112,6 +118,19 @@ def pack():
   # time.sleep(5)
   shutil.rmtree(startdir)
 
+def sendMessage():
+  weixin.getToken()
+  sbData = Handle.SB()
+  print(weixin.sendMessage({
+    "touser" : "@all",
+    "msgtype" : "text",
+    "agentid" : 1000004,
+    "text" : {
+      "content" : '购买意愿: ' + str(round(sbData['buy'] / sbData['sell'], 2))
+    },
+    "safe":0
+  }))
+
 # 指定时间运行
 schedule.every().day.at("09:25").do(start)
 schedule.every().day.at("11:35").do(stop)
@@ -119,6 +138,9 @@ schedule.every().day.at("13:25").do(start)
 schedule.every().day.at("15:35").do(stop)
 # 每天4点压缩数据
 schedule.every().day.at("16:00").do(pack)
+
+# 每天9点40发送购买意愿
+schedule.every().day.at("09:40").do(sendMessage)
 
 # start()
 # pack()
