@@ -120,7 +120,7 @@ schedule.every().day.at("15:35").do(stop)
 # 每天4点压缩数据
 schedule.every().day.at("16:00").do(pack)
 
-start()
+# start()
 # pack()
 
 # 不断运行
