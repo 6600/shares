@@ -143,7 +143,7 @@ schedule.every().day.at("16:00").do(pack)
 schedule.every().day.at("09:40").do(sendMessage)
 
 # start()
-# pack()
+pack()
 
 # 不断运行
 while True:
