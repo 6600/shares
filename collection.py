@@ -86,6 +86,7 @@ def run():
       file_obj.write(summary)
     
     # 每5秒执行一次
+    schedule.run_pending()
     time.sleep(5)
 
 # 开始运行程序
@@ -145,9 +146,9 @@ schedule.every().day.at("16:00").do(pack)
 schedule.every().day.at("09:40").do(sendMessage)
 
 # start()
-pack()
+# pack()
 
-# # 不断运行
-# while True:
-#   schedule.run_pending()
-#   time.sleep(1)
+# 不断运行
+while True:
+  schedule.run_pending()
+  time.sleep(1)
