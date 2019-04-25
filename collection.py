@@ -146,7 +146,7 @@ schedule.every().day.at("09:40").do(sendMessage)
 # start()
 pack()
 
-# 不断运行
-while True:
-  schedule.run_pending()
-  time.sleep(1)
+# # 不断运行
+# while True:
+#   schedule.run_pending()
+#   time.sleep(1)
