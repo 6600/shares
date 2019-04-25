@@ -106,6 +106,7 @@ def stop():
     keepRun = False
 
 def pack():
+  print('开始压缩')
   startdir = "./history/temp"  #要压缩的文件夹路径
   file_news ='./history/' + time.strftime('%Y.%m.%d',time.localtime(time.time())) +'.zip' # 压缩后文件夹的名字
   z = zipfile.ZipFile(file_news,'w',zipfile.ZIP_DEFLATED) #参数一：文件夹名
