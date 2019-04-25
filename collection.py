@@ -117,6 +117,7 @@ def pack():
   z.close()
   time.sleep(5)
   shutil.rmtree(startdir)
+  print('压缩成功')
 
 def sendMessage():
   weixin.getToken()
