@@ -124,15 +124,24 @@ def pack():
 def sendMessage():
   weixin.getToken()
   sbData = Handle.SB()
-  print(weixin.sendMessage({
+  # 五笔交易量
+  wmjyl = Handle.wmjyl()
+
+  # 购买意愿
+  gmyy = str(round(sbData['buy'] / sbData['sell'], 2))
+  # 最近5笔手数比值
+  zjwbss = str(round(wmjyl[1] / wmjyl[3], 4))
+  # 最近5笔买卖占比
+  zjwbmm = str(round(wmjyl[0] / wmjyl[2], 2))
+  weixin.sendMessage({
     "touser" : "@all",
     "msgtype" : "text",
     "agentid" : 1000004,
     "text" : {
-      "content" : '购买意愿: ' + str(round(sbData['buy'] / sbData['sell'], 2))
+      "content" : '购买意愿: ' + gmyy + '\r\n最近5笔手数比值: ' + zjwbss + '\r\n最近5笔买卖比值: ' + zjwbmm
     },
     "safe":0
-  }))
+  })
 
 # 指定时间运行
 schedule.every().day.at("09:25").do(start)
@@ -147,6 +156,8 @@ schedule.every().day.at("09:40").do(sendMessage)
 
 # start()
 # pack()
+
+# sendMessage()
 
 # 不断运行
 while True:
