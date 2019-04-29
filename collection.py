@@ -137,10 +137,10 @@ def sendMessage():
 # 指定时间运行
 schedule.every().day.at("09:25").do(start)
 schedule.every().day.at("11:35").do(stop)
-schedule.every().day.at("13:25").do(start)
-schedule.every().day.at("15:35").do(stop)
+schedule.every().day.at("12:55").do(start)
+schedule.every().day.at("15:05").do(stop)
 # 每天4点压缩数据
-schedule.every().day.at("16:00").do(pack)
+schedule.every().day.at("15:10").do(pack)
 
 # 每天9点40发送购买意愿
 schedule.every().day.at("09:40").do(sendMessage)
