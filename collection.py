@@ -205,7 +205,7 @@ def sendMessage():
     "safe":0
   })
 
-start()
+# start()
 print('程序正在等待指定时间运行!')
 # 指定时间运行
 schedule.every().day.at("09:25").do(start)
