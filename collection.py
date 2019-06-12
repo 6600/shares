@@ -110,7 +110,7 @@ def getData (tempList):
     splitData = sz.split('~')
     # 股票id
     stockID = splitData[1]
-    fiveSecondTradingVolume[stockID] = getDiveSecondTradingVolume(splitData)
+    # fiveSecondTradingVolume[stockID] = getDiveSecondTradingVolume(splitData)
 
     if (timeData == ''):
       timeData = splitData[29]
@@ -126,7 +126,7 @@ def run():
     global timeData
     global analyse
     global fiveSecondTradingVolume
-    summary = '股票名字,代码,当前价格,昨日收盘价,今日开盘价,成交的股票数,外盘,内盘,买一报价,买一数量,买二报价,买二数量,买三报价,买三数量,买四报价,买四数量,买五报价,买五数量,卖一报价,卖一数量,卖二报价,卖二数量,卖三报价,卖三数量,卖四报价,卖四数量,卖五报价,卖五数量,最近逐笔成交,时间,涨跌,涨跌%,今日最高价,今日最低价,价格/成交量(手)/成交额,成交量(手),成交金额,换手率(%),市盈率,最高,最低,振幅(%),流通市值(亿),总市值(亿),市净率,涨停价,跌停价,量比,委差,平均成本,PE(动)\n'
+    summary = '股票名字,代码,当前价格,昨日收盘价,今日开盘价,成交的股票数,外盘,内盘,买一报价,买一数量,买二报价,买二数量,买三报价,买三数量,买四报价,买四数量,买五报价,买五数量,卖一报价,卖一数量,卖二报价,卖二数量,卖三报价,卖三数量,卖四报价,卖四数量,卖五报价,卖五数量,最近逐笔成交,时间,涨跌,涨跌%,今日最高价,今日最低价,价格/成交量(手)/成交额,成交量(手),成交金额,换手率(%),市盈率,,最高,最低,振幅(%),流通市值(亿),总市值(亿),市净率,涨停价,跌停价,量比,委差,平均成本,市盈率(动),市盈率(静),,,贝塔值,成交额,\n'
     # 每200个提交一次
 
     # 当前等待获取数据列表
@@ -146,7 +146,7 @@ def run():
     with open(file_path, mode='w', encoding='utf_8_sig') as file_obj:
       file_obj.write(summary)
     
-    print(fiveSecondTradingVolume)
+    # print(fiveSecondTradingVolume)
     # 每5秒执行一次
     schedule.run_pending()
     time.sleep(5)

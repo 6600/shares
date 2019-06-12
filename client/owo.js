@@ -73,7 +73,7 @@ module.exports = {
       // 是否压缩css
       minifyCss: true,
       // 是否压缩js
-      minifyJs: true,
+      minifyJs: false,
       // 输出文件自动追加版本号，可以用来消除缓存
       outFileAddVersion: true,
     }

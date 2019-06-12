@@ -163,11 +163,10 @@ class Handle():
       # 筛选出市净率低的
       PB = float(player[45])
       # 取出市盈率
-      syl = player[38]
-      if (syl == 'S'):
-        continue
+      syl = player[51]
+      # print(PB)
       # 判断市净率大于0 且 市盈率大于0
-      if (PB < 0.95 and PB > 0 and float(syl) > 0):
+      if (PB < 0.95 and PB > 0 and float(syl) > 0 and float(syl) < 50):
         # 内外盘
         buy = float(player[6])
         sell = float(player[7])
@@ -175,7 +174,7 @@ class Handle():
           # 平均成本
           # print(player)
           # print(player[38], player[45], player[50])
-          VPBList.append([syl, PB, player[0], float(player[50]) - float(player[2])])
+          VPBList.append([syl, PB, player[0], float(player[2]) - float(player[50])])
     return VPBList
   
   # 获取内盘外盘信息 饼状图

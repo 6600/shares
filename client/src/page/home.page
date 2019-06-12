@@ -200,7 +200,7 @@
           xAxis: {
             type: 'value',
             name: '市盈率',
-            max: 100,
+            max: 50,
             min: 0,
           },
           yAxis: {
