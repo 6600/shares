@@ -183,28 +183,36 @@ def pack():
   shutil.rmtree(startdir)
   print('压缩成功')
 
+def getSZInfo ():
+  return requests.get(url='http://qt.gtimg.cn/?q=sh000001').text.split('~')
+
 def sendMessage():
+  # 获取上证信息
+  szinfo = getSZInfo()
   weixin.getToken()
-  sbData = Handle.SB()
   # 五笔交易量
   wmjyl = Handle.wmjyl()
-
-  # 购买意愿
-  gmyy = str(round(sbData['buy'] / sbData['sell'], 2))
   # 最近5笔手数比值
-  zjwbss = str(round(wmjyl[1] / wmjyl[3], 4))
+  zjwbss = str(round(wmjyl[1] / wmjyl[3], 2))
   # 最近5笔买卖占比
   zjwbmm = str(round(wmjyl[0] / wmjyl[2], 2))
+  # 判断高低开
+  kpqk = '高开' if float(szinfo[4]) < float(szinfo[5]) else '低开'
+  # 购买意愿 = 外盘 / 内盘
+  message = '开盘情况: ' + kpqk + '\r\n手数比值: ' + zjwbss + '\r\n买卖比值: ' + zjwbmm + '\r\n成交数量: ' + szinfo[6]
+  # print(message)
   weixin.sendMessage({
     "touser" : "@all",
     "msgtype" : "text",
     "agentid" : 1000004,
     "text" : {
-      "content" : '购买意愿: ' + gmyy + '\r\n最近5笔手数比值: ' + zjwbss + '\r\n最近5笔买卖比值: ' + zjwbmm
+      "content" : message
     },
     "safe":0
   })
 
+# sendMessage()
+# pack()
 # start()
 print('程序正在等待指定时间运行!')
 # 指定时间运行
@@ -221,7 +229,7 @@ schedule.every().day.at("09:40").do(sendMessage)
 # start()
 # pack()
 
-# sendMessage()
+
 
 # 不断运行
 while True:
