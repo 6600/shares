@@ -98,7 +98,7 @@ def getDiveSecondTradingVolume (splitData):
 def getData (tempList):
 
   listString = ','.join(tempList)
-  data = requests.get(url='http://qt.gtimg.cn/q=' + listString).text
+  data = requests.get(url='http://qt.gtimg.cn/q=' + listString, timeout=5).text
   sharesList = re.findall(r"=\"1\~(.+?)\";", data)
   
   # 去掉空数据
@@ -184,7 +184,7 @@ def pack():
   print('压缩成功')
 
 def getSZInfo ():
-  return requests.get(url='http://qt.gtimg.cn/?q=sh000001').text.split('~')
+  return requests.get(url='http://qt.gtimg.cn/?q=sh000001', timeout=5).text.split('~')
 
 def sendMessage():
   # 获取上证信息
@@ -192,15 +192,26 @@ def sendMessage():
   weixin.getToken()
   # 五笔交易量
   wmjyl = Handle.wmjyl()
+  # 购买意愿
+  sbData = Handle.SB()
+  gmyy = str(round(sbData['buy'] / sbData['sell'], 2))
   # 最近5笔手数比值
   zjwbss = str(round(wmjyl[1] / wmjyl[3], 2))
   # 最近5笔买卖占比
   zjwbmm = str(round(wmjyl[0] / wmjyl[2], 2))
   # 判断高低开
-  kpqk = '高开' if float(szinfo[4]) < float(szinfo[5]) else '低开'
+  message = '涨跌情况: '  + szinfo[32] + '%'
+
   # 购买意愿 = 外盘 / 内盘
-  message = '开盘情况: ' + kpqk + '\r\n手数比值: ' + zjwbss + '\r\n买卖比值: ' + zjwbmm + '\r\n成交数量: ' + szinfo[6]
-  # print(message)
+  message += '\r\n购买意愿: ' + gmyy
+  message += '\r\n手数比值: ' + zjwbss
+  message += '\r\n买卖比值: ' + zjwbmm
+  message += '\r\n成交数量: ' + str(int(int(szinfo[6]) / 10000)) + '万'
+  message += '\r\n成交金额: ' + str(int(float(szinfo[57]) / 10000)) + '亿'
+
+  print(message)
+  # print(szinfo)
+  # return
   weixin.sendMessage({
     "touser" : "@all",
     "msgtype" : "text",
@@ -211,7 +222,7 @@ def sendMessage():
     "safe":0
   })
 
-# sendMessage()
+# sendMessages()
 # pack()
 # start()
 print('程序正在等待指定时间运行!')
