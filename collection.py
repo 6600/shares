@@ -13,6 +13,8 @@ from handle import Handle
 
 from sdk import Weixin
 
+from requests import exceptions
+
 # 如果不存在目录则创建目录
 def mkdir(path):
   # 去除首位空格
@@ -98,23 +100,27 @@ def getDiveSecondTradingVolume (splitData):
 def getData (tempList):
 
   listString = ','.join(tempList)
-  data = requests.get(url='http://qt.gtimg.cn/q=' + listString, timeout=5).text
-  sharesList = re.findall(r"=\"1\~(.+?)\";", data)
   
-  # 去掉空数据
-  for sz in sharesList:
-    global summary
-    global timeData
-    global fiveSecondTradingVolume
+  try:
+    data = requests.get(url='http://qt.gtimg.cn/q=' + listString, timeout=5)
+  except exceptions.Timeout as e:
+    print(str(e))
+  else:
+    sharesList = re.findall(r"=\"1\~(.+?)\";", data.text)
+    # 去掉空数据
+    for sz in sharesList:
+      global summary
+      global timeData
+      global fiveSecondTradingVolume
 
-    splitData = sz.split('~')
-    # 股票id
-    stockID = splitData[1]
-    # fiveSecondTradingVolume[stockID] = getDiveSecondTradingVolume(splitData)
+      splitData = sz.split('~')
+      # 股票id
+      stockID = splitData[1]
+      # fiveSecondTradingVolume[stockID] = getDiveSecondTradingVolume(splitData)
 
-    if (timeData == ''):
-      timeData = splitData[29]
-    summary += sz.replace("~", ",") + '\n'
+      if (timeData == ''):
+        timeData = splitData[29]
+      summary += sz.replace("~", ",") + '\n'
 
 
 # 存储数据
@@ -184,7 +190,13 @@ def pack():
   print('压缩成功')
 
 def getSZInfo ():
-  return requests.get(url='http://qt.gtimg.cn/?q=sh000001', timeout=5).text.split('~')
+  try:
+    response = requests.get(url='http://qt.gtimg.cn/?q=sh000001', timeout=5)
+  except exceptions.Timeout as e:
+    print(str(e))
+    return ''
+  else:
+    return response.text.split('~')
 
 def sendMessage():
   # 获取上证信息
