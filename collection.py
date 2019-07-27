@@ -9,6 +9,7 @@ import time
 import schedule
 import zipfile
 import shutil
+import datetime
 from handle import Handle
 
 from sdk import Weixin
@@ -159,13 +160,17 @@ def run():
 
 # 开始运行程序
 def start():
-  global keepRun
-  # 创建文件夹
-  mkdir('./history/temp')
-  if (not keepRun):
-    print('开始运行')
-    keepRun = True
-    run()
+  # 开始前判断是否处于休市
+  if (isOpening()):
+    global keepRun
+    # 创建文件夹
+    mkdir('./history/temp')
+    if (not keepRun):
+      print('开始运行')
+      keepRun = True
+      run()
+  else:
+    print('今日休市,不启动采集系统!')
 
 # 停止程序
 def stop():
@@ -198,43 +203,50 @@ def getSZInfo ():
   else:
     return response.text.split('~')
 
+def isOpening ():
+  response = requests.get(url='http://gu.qq.com/sh000001/zs', timeout=5)
+  if "已休市" in response.text:
+    return False
+  else:
+    return True
+
 def sendMessage():
-  # 获取上证信息
-  szinfo = getSZInfo()
-  weixin.getToken()
-  # 五笔交易量
-  wmjyl = Handle.wmjyl()
-  # 购买意愿
-  sbData = Handle.SB()
-  gmyy = str(round(sbData['buy'] / sbData['sell'], 2))
-  # 最近5笔手数比值
-  zjwbss = str(round(wmjyl[1] / wmjyl[3], 2))
-  # 最近5笔买卖占比
-  zjwbmm = str(round(wmjyl[0] / wmjyl[2], 2))
-  # 判断高低开
-  message = '涨跌情况: '  + szinfo[32] + '%'
+  if (isOpening()):
+    # 获取上证信息
+    szinfo = getSZInfo()
+    weixin.getToken()
+    # 五笔交易量
+    wmjyl = Handle.wmjyl()
+    # 购买意愿
+    sbData = Handle.SB()
+    gmyy = str(round(sbData['buy'] / sbData['sell'], 2))
+    # 最近5笔手数比值
+    zjwbss = str(round(wmjyl[1] / wmjyl[3], 2))
+    # 最近5笔买卖占比
+    zjwbmm = str(round(wmjyl[0] / wmjyl[2], 2))
+    # 判断高低开
+    message = '涨跌情况: '  + szinfo[32] + '%'
 
-  # 购买意愿 = 外盘 / 内盘
-  message += '\r\n购买意愿: ' + gmyy
-  message += '\r\n手数比值: ' + zjwbss
-  message += '\r\n买卖比值: ' + zjwbmm
-  message += '\r\n成交数量: ' + str(int(int(szinfo[6]) / 10000)) + '万'
-  message += '\r\n成交金额: ' + str(int(float(szinfo[57]) / 10000)) + '亿'
+    # 购买意愿 = 外盘 / 内盘
+    message += '\r\n购买意愿: ' + gmyy
+    message += '\r\n手数比值: ' + zjwbss
+    message += '\r\n买卖比值: ' + zjwbmm
+    message += '\r\n成交数量: ' + str(int(int(szinfo[6]) / 10000)) + '万'
+    message += '\r\n成交金额: ' + str(int(float(szinfo[57]) / 10000)) + '亿'
+    # print(szinfo)
+    # return
+    weixin.sendMessage({
+      "touser" : "@all",
+      "msgtype" : "text",
+      "agentid" : 1000004,
+      "text" : {
+        "content" : message
+      },
+      "safe":0
+    })
+  else:
+    print('今日休市,不发送信息简报!')
 
-  print(message)
-  # print(szinfo)
-  # return
-  weixin.sendMessage({
-    "touser" : "@all",
-    "msgtype" : "text",
-    "agentid" : 1000004,
-    "text" : {
-      "content" : message
-    },
-    "safe":0
-  })
-
-# sendMessages()
 # pack()
 # start()
 print('程序正在等待指定时间运行!')
