@@ -72,8 +72,11 @@ def wmjyl():
     "data": handle.Handle.wmjyl()
   })
 
-if __name__ == '__main__':
+def main_handler():
   app.run(
     host='0.0.0.0',
     port= 8003
   )
+
+if __name__ == '__main__':
+  main_handler()

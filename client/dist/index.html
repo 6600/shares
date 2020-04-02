@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <title>{TAG_14226_TAG}</title>
+    <!-- 页面的元信息 -->
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1"/>
+    
+      <!-- 页面主样式文件 -->
+      <link charset="utf-8"  rel="stylesheet" href="./static/css/owo.core.css">
+      
+    <!-- 附属css文件 -->
+    <link rel="stylesheet" href="./static/css/main.css" charset="utf-8">
+      
+  </head>
+  <body>
+    <div class="scale-box"><!-- 页面区域 -->
+    <!-- 页面[home]-->
+    <div class="show-box page" template="home" style="display: block;">
+    <div class="show show-2" id="show2">
+      <div class="title">大盘涨跌-散点图</div>
+      <div class="chart chart-2" id="chart2"></div>
+    </div>
+    <div class="show show-3" id="show3">
+      <div class="title">买/卖平均信息图</div>
+      <div class="chart chart-3" id="chart3"></div>
+    </div>
+    <div class="show show-4" id="show4">
+      <div class="title">大盘涨跌-散点图</div>
+      <div class="chart chart-4" id="chart4"></div>
+    </div>
+    <div class="show show-1" id="show1">
+      <div class="title">大盘涨跌-饼状图</div>
+      <div class="chart chart-1" id="chart1"></div>
+    </div>
+    <div class="show show-5" id="show5">
+      <div class="title">买入/卖出意愿-饼状图</div>
+      <div class="chart chart-5" id="chart5"></div>
+    </div>
+    <div class="show show-6" id="show6">
+      <div class="title">最近五笔交易手数</div>
+      <div class="chart chart-6" id="chart6"></div>
+    </div>
+    <div class="show show-7" id="show7">
+      <div class="title">最近五笔买卖占比</div>
+      <div class="chart chart-7" id="chart7"></div>
+    </div>
+    <div class="right-bar" @name="rightBar"></div>
+  </div></div>
+    
+
+    <script src="./static/js/echarts.js" type="text/javascript"  charset="UTF-8"></script>
+    <!-- 框架script文件 -->
+    <script src="./static/js/owo.core.js" type="text/javascript" charset="UTF-8"></script>
+<script>
+owo.script = {
+  "home": {
+    "created": function created() {
+      var _this = this;
+
+      this.getData('http://127.0.0.1:8003/show1').then(function (data) {
+        var chart1 = echarts.init(document.getElementById('chart1'));
+        chart1.setOption({
+          series: [{
+            name: '概况',
+            type: 'pie',
+            radius: '60%',
+            data: data,
+            label: {
+              position: 'inside',
+              color: '#495A80',
+              "formatter": '{b}: {d}%'
+            },
+            itemStyle: {
+              emphasis: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
+            }
+          }],
+          color: ['#9966CC', '#EAF048', '#F6D6FF']
+        });
+      });
+      this.getData('http://127.0.0.1:8003/distribution').then(function (data) {
+        var chart2 = echarts.init(document.getElementById('chart2'));
+        var chartConfig = {
+          xAxis: {
+            show: false
+          },
+          yAxis: {},
+          legend: {
+            top: 30,
+            left: 5
+          },
+          grid: {
+            left: 30,
+            top: 120,
+            bottom: 20,
+            right: 30
+          },
+          tooltip: {
+            formatter: function formatter(obj) {
+              var value = obj.value;
+              return value[2] + ": " + value[1] + "%";
+            }
+          },
+          series: []
+        };
+
+        for (var key in data) {
+          chartConfig.series.push({
+            symbolSize: 5,
+            name: key,
+            data: data[key],
+            type: 'scatter' // markLine: {
+            //   data : [
+            //     {type : 'average', name: '平均值'}
+            //   ]
+            // }
+
+          });
+        }
+
+        chart2.setOption(chartConfig);
+      });
+      this.getData('http://127.0.0.1:8003/transactionAve').then(function (data) {
+        var chart2 = echarts.init(document.getElementById('chart3')); // console.log(data[0])
+
+        chart2.setOption({
+          xAxis: {
+            type: 'category',
+            axisTick: {
+              show: false
+            },
+            data: ['买/卖1', '买/卖2', '买/卖3', '买/卖4', '买/卖5']
+          },
+          legend: {
+            left: 0,
+            top: 35,
+            data: ['平均买价', '平均卖价', '平均买数', '平均卖数']
+          },
+          yAxis: [{
+            type: 'value',
+            scale: true,
+            name: '平均价格',
+            max: 20,
+            min: 12
+          }, {
+            type: 'value',
+            scale: true,
+            name: '平均手数',
+            max: 4000,
+            min: 0
+          }],
+          grid: {
+            left: 30,
+            top: 100,
+            bottom: 20,
+            right: 50
+          },
+          series: [{
+            name: '平均买价',
+            type: 'bar',
+            label: {
+              normal: {
+                show: true,
+                position: 'inside'
+              }
+            },
+            data: data[0]
+          }, {
+            name: '平均卖价',
+            type: 'bar',
+            label: {
+              normal: {
+                show: true,
+                position: 'inside'
+              }
+            },
+            data: data[2]
+          }, {
+            name: '平均买数',
+            type: 'line',
+            label: {
+              normal: {
+                show: true,
+                position: 'top'
+              }
+            },
+            yAxisIndex: 1,
+            data: data[1]
+          }, {
+            name: '平均卖数',
+            type: 'line',
+            label: {
+              normal: {
+                show: true,
+                position: 'top'
+              }
+            },
+            yAxisIndex: 1,
+            data: data[3]
+          }],
+          color: ['#9966CC', '#00FF80', '#495A80', '#f17c67']
+        });
+
+        _this.getChart4();
+      });
+    },
+    "getChart4": function getChart4() {
+      var _this2 = this;
+
+      this.getData('http://127.0.0.1:8003/VPB').then(function (data) {
+        var chart4 = echarts.init(document.getElementById('chart4'));
+        chart4.setOption({
+          xAxis: {
+            type: 'value',
+            name: '市盈率',
+            max: 50,
+            min: 0
+          },
+          yAxis: {
+            type: 'value',
+            name: '市净率',
+            max: 1,
+            min: 0.6
+          },
+          grid: {
+            left: 30,
+            top: 60,
+            bottom: 20,
+            right: 60
+          },
+          tooltip: {
+            formatter: function formatter(obj) {
+              var value = obj.value;
+              return value[2] + ":<br/>\u5E02\u51C0\u7387: " + value[1] + "<br/>\u5E02\u76C8\u7387: " + value[0] + "<br/>\u5E73\u5747\u6210\u672C: " + value[3].toFixed(4);
+            }
+          },
+          series: [{
+            symbolSize: function symbolSize(data) {
+              return (-data[3] * 100 + 10).toFixed(2);
+            },
+            data: data,
+            type: 'scatter'
+          }],
+          color: ['#00FF80']
+        });
+        setTimeout(function () {
+          _this2.getChart5();
+        }, 0);
+      });
+    },
+    "getChart5": function getChart5() {
+      var _this3 = this;
+
+      this.getData('http://127.0.0.1:8003/SB').then(function (data) {
+        var chart5 = echarts.init(document.getElementById('chart5'));
+        chart5.setOption({
+          series: [{
+            name: '买入/卖出意愿',
+            type: 'pie',
+            radius: '60%',
+            data: data,
+            label: {
+              position: 'inside',
+              "formatter": '{b}: {d}%'
+            },
+            itemStyle: {
+              emphasis: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
+            }
+          }],
+          color: ['#f17c67', '#495A80']
+        });
+        setTimeout(function () {
+          _this3.wmjyl();
+        }, 0);
+      });
+    },
+    "getData": function getData(url) {
+      return new Promise(function (resolve, reject) {
+        var ajax = new XMLHttpRequest(); //步骤二:设置请求的url参数,参数一是请求的类型,参数二是请求的url,可以带参数,动态的传递参数starName到服务端
+
+        ajax.open('get', url); //步骤三:发送请求
+
+        ajax.send(); //步骤四:注册事件 onreadystatechange 状态改变就会调用
+
+        ajax.onreadystatechange = function () {
+          if (ajax.readyState == 4 && ajax.status == 200) {
+            resolve(JSON.parse(ajax.responseText).data);
+          }
+        };
+      });
+    },
+    "wmjyl": function wmjyl() {
+      this.getData('http://127.0.0.1:8003/wmjyl').then(function (data) {
+        // console.log(data)
+        var chart6 = echarts.init(document.getElementById('chart6'));
+        chart6.setOption({
+          xAxis: {
+            type: 'category',
+            data: ['买', '卖']
+          },
+          grid: {
+            left: 50,
+            top: 40,
+            bottom: 20,
+            right: 20
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [{
+            barWidth: 15,
+            data: [data[1], data[3]],
+            type: 'bar'
+          }],
+          color: ['#009fe9']
+        }); // 占比饼状图
+
+        var chart7 = echarts.init(document.getElementById('chart7'));
+        chart7.setOption({
+          series: [{
+            name: '五笔买卖占比',
+            type: 'pie',
+            radius: '60%',
+            data: [{
+              name: "卖",
+              value: data[2]
+            }, {
+              name: "买",
+              value: data[0]
+            }],
+            label: {
+              position: 'inside',
+              "formatter": '{b}: {d}%'
+            },
+            itemStyle: {
+              emphasis: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
+            }
+          }],
+          color: ['#f17c67', '#495A80']
+        });
+      });
+    }
+  }
+};</script>
+  </body>
+</html>

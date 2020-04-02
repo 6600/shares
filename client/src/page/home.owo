@@ -37,7 +37,7 @@
     data: {
     },
     created: function () {
-      this.getData('/show1').then((data) => {
+      this.getData('http://127.0.0.1:8003/show1').then((data) => {
         const chart1 = echarts.init(document.getElementById('chart1'))
         chart1.setOption({
           series : [
@@ -63,7 +63,7 @@
           color: ['#9966CC', '#EAF048', '#F6D6FF']
         })
       })
-      this.getData('/distribution').then((data) => {
+      this.getData('http://127.0.0.1:8003/distribution').then((data) => {
         const chart2 = echarts.init(document.getElementById('chart2'))
         let chartConfig = {
           xAxis: {
@@ -104,7 +104,7 @@
         }
         chart2.setOption(chartConfig)
       })
-      this.getData('/transactionAve').then((data) => {
+      this.getData('http://127.0.0.1:8003/transactionAve').then((data) => {
         const chart2 = echarts.init(document.getElementById('chart3'))
         // console.log(data[0])
         chart2.setOption({
@@ -194,7 +194,7 @@
       })
     },
     getChart4: function () {
-      this.getData('/VPB').then((data) => {
+      this.getData('http://127.0.0.1:8003/VPB').then((data) => {
         const chart4 = echarts.init(document.getElementById('chart4'))
         chart4.setOption({
           xAxis: {
@@ -236,7 +236,7 @@
       })
     },
     getChart5: function () {
-      this.getData('/SB').then((data) => {
+      this.getData('http://127.0.0.1:8003/SB').then((data) => {
         const chart5 = echarts.init(document.getElementById('chart5'))
         chart5.setOption({
           series : [
@@ -282,7 +282,7 @@
     },
     // 五秒交易量
     wmjyl: function () {
-      this.getData('/wmjyl').then((data) => {
+      this.getData('http://127.0.0.1:8003/wmjyl').then((data) => {
         // console.log(data)
         const chart6 = echarts.init(document.getElementById('chart6'))
         chart6.setOption({

@@ -1,0 +1,75 @@
+{
+	"basePath": "./",
+	"root": "/src",
+	"title": "{TAG_14226_TAG}",
+	"scheme": [],
+	"outFolder": "./dist",
+	"container": "scale-box",
+	"resourceFolder": "./src/resource",
+	"headList": [
+		{
+      "http-equiv": "content-type",
+      "content": "text/html; charset=UTF-8"
+    },
+    {
+      "name": "viewport",
+      "content": "initial-scale=1,user-scalable=no,maximum-scale=1"
+    }
+	],
+	"scriptList": [
+		{
+      "name": "echarts",
+      "src": "./src/resource/echarts.min.js"
+    }
+	],
+	"styleList": [
+		{
+			"name": "main",
+			"src": "./src/main.css",
+			"resource": true
+		}
+	],
+	"pageList": [
+		{
+			"name": "home",
+      "src": "./src/page/home.owo",
+			"type": "page"
+		}
+	],
+	"mode": {
+		"dev": {
+			"basePath": "./",
+			"debug": true,
+			"outPut": {
+				"merge": true,
+				"minifyCss": false,
+				"minifyJs": false,
+				"addVersion": false,
+				"allAnimate": false
+			},
+			"serverPort": 8000,
+			"server": true,
+			"autoReload": true,
+			"remoteDebug": false,
+			"watcherEnable": true
+		},
+		"build": {
+			"debug": false,
+			"basePath": "./",
+			"alertLink": false,
+			"route": {
+				"startAtHome": true
+			},
+			"outPut": {
+				"minifyCss": false,
+				"minifyJs": false,
+				"addVersion": true,
+				"embedSize": 0,
+				"merge": false,
+				"allAnimate": false
+			},
+			"startAtHome": true,
+			"handleLink": false
+		}
+	}
+}
